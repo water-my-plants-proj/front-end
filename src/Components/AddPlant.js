@@ -20,7 +20,7 @@ const initialDisabled = true;
 export default function AddPlant(){
 
 	const [plantValues, setPlantValues] = useState(initialPlantValues);
-	const [disabled, setDisabled] = useState(initialDisabled);   //need to add disabled button functionality based on validation
+	const [disabled, setDisabled] = useState(initialDisabled);   
 	const [formErrors, setPlantErrors] = useState(initialPlantErrors);
 
 	const validate = (name, value) => {
