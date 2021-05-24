@@ -14,7 +14,6 @@ const initialLoginErrors = {
 }
 const initialDisabled = true;
 
-
 export default function Login() {   //removed props, dont know what will be passed in
 	const [loginValues, setLoginValues] = useState(initialLoginValues);
 	const [disabled, setDisabled] = useState(initialDisabled);   //need to add disabled button functionality based on validation
