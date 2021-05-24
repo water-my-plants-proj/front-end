@@ -1,20 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function Login(props) {
-	const { loginValues, disabled, submit, change } = props;
+export default function Login() {   //removed props, dont know what will be passed in
+	// const { loginValues, disabled, submit, change } = props;
+
+	const initialLoginValues = {
+		username: '',
+		phoneNum: '',
+		password: ''
+	}
+	const initialDisabled = true;
+
+	const [loginValues, setLoginValues] = useState(initialLoginValues)
 
 	const onSubmit = evt => {
     evt.preventDefault()
-    submit()
+    submit() //not sure how this will need to be set up
   }
 
+	const inputChange = (name, value) => {
+    validate(name, value)
+    setLoginValues({
+      ...loginValues,
+      [name]: value
+    })
+  }
 	const onChange = evt => {
 		const { name, value } = evt.target
-		change(name, value)
+		inputChange(name, value)
 	}
+
+	// const loginSubmit = () => {
+  //   const newLogin = {
+  //     username: formValues.username.trim(),
+  //     phoneNum: formValues.phoneNum.trim(),
+  //     password: formValues.password.trim()
+  //   }
+  //   login(newLogin)
+  // }
+
     return (
         <div>
-            <form className='login container' onSubmit={onSubmit}>
+            <form className='loginContainer' onSubmit={onSubmit}>
 							<h2>Login</h2>
 							<label>Username:
 								<input 
