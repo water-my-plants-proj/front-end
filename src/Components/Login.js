@@ -1,6 +1,3 @@
-// I did an npm i
-
-
 import React, { useState } from 'react'
 import * as yup from 'yup'
 import schema from './validation/LoginSchema'
@@ -30,13 +27,21 @@ export default function Login() {   //removed props, dont know what will be pass
       .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0]}))
   }
 
-	const onSubmit = evt => {
-    evt.preventDefault()
-    //submit() //not sure how this will need to be set up
+	const loginSubmit = () => {
+    const newLogin = {
+      username: loginValues.username.trim(),
+      phoneNum: loginValues.phoneNum.trim(),
+      password: loginValues.password.trim()
+    }
+    console.log(newLogin) //token/auth will need to occur here, I think
+		//receiving token for auth
+		//pages cant be reached without token
   }
 
-	//receiving token for auth
-	// pages cant be reached without token
+	const onSubmit = evt => {
+    evt.preventDefault()
+    loginSubmit() //not sure how this will need to be set up
+  }
 
 	const inputChange = (name, value) => {
     validate(name, value)
@@ -49,15 +54,6 @@ export default function Login() {   //removed props, dont know what will be pass
 		const { name, value } = evt.target
 		inputChange(name, value)
 	}
-
-	// const loginSubmit = () => {
-  //   const newLogin = {
-  //     username: formValues.username.trim(),
-  //     phoneNum: formValues.phoneNum.trim(),
-  //     password: formValues.password.trim()
-  //   }
-  //   login(newLogin)
-  // }
 
 	return (
 			<div>
