@@ -4,11 +4,11 @@ import App from './App';
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { reducer } from './reducers'
+import { Reducer } from './Reducers/Index.js'
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
-const store = createStore(reducer, applyMiddleware(logger, thunk));
+const store = createStore(Reducer, applyMiddleware(logger, thunk));
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN, FETCH_START, FETCH_SUCCESS, FETCH_FAIL } from '../Actions'
+import { SIGN_UP, LOG_IN, FETCH_START, FETCH_SUCCESS, FETCH_FAIL } from '../Actions/Index'
 
 const initialState = {
     plantList: [

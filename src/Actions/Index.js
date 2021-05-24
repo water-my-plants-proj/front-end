@@ -5,7 +5,6 @@ export const LOG_IN = "LOG_IN";
 export const FETCH_START = "FETCH_START";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAIL = "FETCH_FAIL";
-
 export const fetchPlants= () => {
     return(dispatch => {
         dispatch(fetchStart());
@@ -13,7 +12,7 @@ export const fetchPlants= () => {
        axiosWithAuth()
         .get('https://plantszapi.herokuapp.com/')
         .then(res => {
-        dispatch({type: FETCH_SUCCESS, payload: /*figure out what payload will be */})
+        dispatch({type: FETCH_SUCCESS, payload:"" /*figure out what payload will be */})
         })
         .catch(err => {
             console.log("ERROR", err)
@@ -23,7 +22,7 @@ export const fetchPlants= () => {
 }
 
 export const signUp = (userData) => {
-    return({type: SIGN_IN, payload: userData})
+    return({type: SIGN_UP, payload: userData})
 }
 
 export const logIn = (userData) => {
