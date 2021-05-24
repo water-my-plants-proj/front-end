@@ -1,21 +1,25 @@
 import React, { useState } from 'react'
 
+const initialLoginValues = {
+	username: '',
+	phoneNum: '',
+	password: ''
+}
+const initialDisabled = true;
+
+const [loginValues, setLoginValues] = useState(initialLoginValues);
+const [disabled, setDisabled] = useState(initialDisabled);   //need to add disabled button functionality based on validation
+
 export default function Login() {   //removed props, dont know what will be passed in
 	// const { loginValues, disabled, submit, change } = props;
-
-	const initialLoginValues = {
-		username: '',
-		phoneNum: '',
-		password: ''
-	}
-	const initialDisabled = true;
-
-	const [loginValues, setLoginValues] = useState(initialLoginValues)
 
 	const onSubmit = evt => {
     evt.preventDefault()
     submit() //not sure how this will need to be set up
   }
+
+	//receiving token for auth
+	// pages cant be reached without token
 
 	const inputChange = (name, value) => {
     validate(name, value)
