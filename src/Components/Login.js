@@ -14,11 +14,13 @@ const initialLoginErrors = {
 }
 const initialDisabled = true;
 
-const [loginValues, setLoginValues] = useState(initialLoginValues);
-const [disabled, setDisabled] = useState(initialDisabled);   //need to add disabled button functionality based on validation
-const [formErrors, setFormErrors] = useState(initialLoginErrors);
+
 
 export default function Login() {   //removed props, dont know what will be passed in
+
+	const [loginValues, setLoginValues] = useState(initialLoginValues);
+	const [disabled, setDisabled] = useState(initialDisabled);   //need to add disabled button functionality based on validation
+	const [formErrors, setFormErrors] = useState(initialLoginErrors);
 
 	const validate = (name, value) => {
     yup.reach(schema, name)
