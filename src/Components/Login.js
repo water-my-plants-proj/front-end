@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import schema from "../validation/LoginSchema";
+import styled from "styled-components";
 
 const initialLoginValues = {
   username: "",
@@ -13,6 +14,39 @@ const initialLoginErrors = {
   password: "",
 };
 const initialDisabled = true;
+
+const StyledFormLogin = styled.div`
+  display: flex;
+  justify-content: center;
+  border: 2px solid green;
+  .loginContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h2 {
+    margin: 0 auto;
+    margin-bottom: 2%;
+  }
+  button {
+    width: 40%;
+    color: green;
+  }
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  .errors {
+    display: flex;
+    color: red;
+    font-size: 0.5rem;
+  }
+`;
 
 export default function Login() {
   //removed props, dont know what will be passed in
@@ -61,7 +95,7 @@ export default function Login() {
   }, [loginValues]);
 
   return (
-    <div>
+    <StyledFormLogin>
       <form className="loginContainer" onSubmit={onSubmit}>
         <h2>Login</h2>
         <label>
@@ -94,13 +128,16 @@ export default function Login() {
             onChange={onChange}
           />
         </label>
-        <button disabled={disabled}>Log In</button>
+        <div>
+          <button disabled={disabled}>Log In</button>
+        </div>
+
         <div className="errors">
           <h3>{formErrors.username}</h3>
           <h3>{formErrors.phoneNum}</h3>
           <h3>{formErrors.password}</h3>
         </div>
       </form>
-    </div>
+    </StyledFormLogin>
   );
 }
