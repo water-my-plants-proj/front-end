@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import schema from "../validation/LoginSchema";
 import styled from "styled-components";
+import {useHistory} from "react-router-dom"
 
 const initialLoginValues = {
   username: "",
@@ -49,6 +50,7 @@ const StyledFormLogin = styled.div`
 `;
 
 export default function Login() {
+  const {push}=useHistory()
   //removed props, dont know what will be passed in
   const [loginValues, setLoginValues] = useState(initialLoginValues);
   const [disabled, setDisabled] = useState(initialDisabled); //need to add disabled button functionality based on validation
@@ -78,6 +80,7 @@ export default function Login() {
   const onSubmit = (evt) => {
     evt.preventDefault();
     loginSubmit(); //not sure how this will need to be set up
+    push("/plant-list")
   };
 
   const inputChange = (name, value) => {
