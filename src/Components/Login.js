@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import schema from "../validation/LoginSchema";
+import styled from "styled-components";
 import {useHistory} from "react-router-dom"
+
 const initialLoginValues = {
   username: "",
   phoneNum: "",
@@ -13,6 +15,39 @@ const initialLoginErrors = {
   password: "",
 };
 const initialDisabled = true;
+
+const StyledFormLogin = styled.div`
+  display: flex;
+  justify-content: center;
+  border: 2px solid green;
+  .loginContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h2 {
+    margin: 0 auto;
+    margin-bottom: 2%;
+  }
+  button {
+    width: 40%;
+    color: green;
+  }
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  .errors {
+    display: flex;
+    color: red;
+    font-size: 0.5rem;
+  }
+`;
 
 export default function Login() {
   const {push}=useHistory()
@@ -26,7 +61,9 @@ export default function Login() {
       .reach(schema, name)
       .validate(value)
       .then(() => setFormErrors({ ...formErrors, [name]: "" }))
-      .catch((err) => setFormErrors({ ...formErrors, [name]: err.errors[0] }));
+      .catch((err) =>
+        setFormErrors({ ...formErrors, [name]: "-" + err.errors[0] })
+      );
   };
 
   const loginSubmit = () => {
@@ -63,7 +100,7 @@ export default function Login() {
   }, [loginValues]);
 
   return (
-    <div>
+    <StyledFormLogin>
       <form className="loginContainer" onSubmit={onSubmit}>
         <h2>Login</h2>
         <label>
@@ -96,13 +133,16 @@ export default function Login() {
             onChange={onChange}
           />
         </label>
-        <button disabled={disabled}>Log In</button>
+        <div className="buttonContainer">
+          <button disabled={disabled}>Log In</button>
+        </div>
+
         <div className="errors">
-          <h3>{formErrors.name}</h3>
+          <h3>{formErrors.username}</h3>
           <h3>{formErrors.phoneNum}</h3>
           <h3>{formErrors.password}</h3>
         </div>
       </form>
-    </div>
+    </StyledFormLogin>
   );
 }
