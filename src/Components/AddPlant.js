@@ -63,7 +63,7 @@ export default function AddPlant() {
       .validate(value)
       .then(() => setPlantErrors({ ...plantErrors, [name]: "" }))
       .catch((err) =>
-        setPlantErrors({ ...plantErrors, [name]: err.errors[0] })
+        setPlantErrors({ ...plantErrors, [name]: "-" + err.errors[0] })
       );
   };
 
