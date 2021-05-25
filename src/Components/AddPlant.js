@@ -1,64 +1,68 @@
 //this component will be interacting with plant list state?
 //submission may need to observe this, and post
+//testing spacing
 
-import React, { useState, useEffect } from 'react'
-import * as yup from 'yup'
-import schema from '../validation/AddPlantSchema'
+import React, { useState, useEffect } from "react";
+import * as yup from "yup";
+import schema from "../validation/AddPlantSchema";
 
 const initialPlantValues = {
-	nickname: '',
-	species: '',
-	h20Frequency: ''
-}
+  nickname: "",
+  species: "",
+  h2OFrequency: "",
+};
 const initialPlantErrors = {
-	nickname: '',
-	species: '',
-	h20Frequency: ''
-}
+  nickname: "",
+  species: "",
+  h2OFrequency: "",
+};
 const initialDisabled = true;
 
-export default function AddPlant(){
+export default function AddPlant() {
+  const [plantValues, setPlantValues] = useState(initialPlantValues);
+  const [disabled, setDisabled] = useState(initialDisabled);
+  const [plantErrors, setPlantErrors] = useState(initialPlantErrors);
 
-	const [plantValues, setPlantValues] = useState(initialPlantValues);
-	const [disabled, setDisabled] = useState(initialDisabled);   
-	const [plantErrors, setPlantErrors] = useState(initialPlantErrors);
-
-	const validate = (name, value) => {
-    yup.reach(schema, name)
+  const validate = (name, value) => {
+    yup
+      .reach(schema, name)
       .validate(value)
-      .then(() => setPlantErrors({ ...plantErrors, [name]: ''}))
-      .catch(err => setPlantErrors({ ...plantErrors, [name]: err.errors[0]}))
-  }
+      .then(() => setPlantErrors({ ...plantErrors, [name]: "" }))
+      .catch((err) =>
+        setPlantErrors({ ...plantErrors, [name]: err.errors[0] })
+      );
+  };
 
-	const addPlantSubmit = () => {
+  const addPlantSubmit = () => {
     const newPlant = {
       nickname: plantValues.nickname.trim(),
       species: plantValues.species.trim(),
-      h20Frequency: plantValues.h20Frequency.trim()
-    }
-    console.log(newPlant)
-		//this information will need to be posted to the end point
-  }
-	const onSubmit = evt => {
-    evt.preventDefault()
-    addPlantSubmit() //not sure how this will need to be set up
-  }
+      h2OFrequency: plantValues.h2OFrequency.trim(),
+    };
+    console.log(newPlant);
+    //this information will need to be posted to the end point
+  };
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    addPlantSubmit(); //not sure how this will need to be set up
+  };
 
-	const inputChange = (name, value) => {
-    validate(name, value)
+  const inputChange = (name, value) => {
+    validate(name, value);
     setPlantValues({
       ...plantValues,
-      [name]: value
-    })
-  }
-	const onChange = evt => {
-		const { name, value } = evt.target
-		inputChange(name, value)
-	}
+      [name]: value,
+    });
+  };
+  const onChange = (evt) => {
+    const { name, value } = evt.target;
+    inputChange(name, value);
+  };
 
-	useEffect(() => {
-    schema.isValid(plantValues).then(valid => setDisabled(!valid))
-  }, [plantValues])
+  useEffect(() => {
+    schema.isValid(plantValues).then((valid) => setDisabled(!valid));
+  }, [plantValues]);
+
 
 	return (
 		<div>
