@@ -62,39 +62,39 @@ export default function AddPlant(){
 
 	return (
 		<div>
-					<form className='newPlantContainer' onSubmit={onSubmit}>
-						<h2>Add a New Plant</h2>
-						<label>Nickname:
-							<input 
-								id='nicknameInput' 
-								type='text' 
-								name='nickname' 
-								value={plantValues.nickname}
-								onChange={onChange}/>
-						</label>
-						<label>Plant Species:
-							<input 
-								id='speciesInput' 
-								type='text' 
-								name='species' 
-								value={plantValues.phoneNum}
-								onChange={onChange}/>
-						</label>
-						<label>Watering Frequency:
-							<input 
-								id='h20FrequencyInput' 
-								type='text' 
-								name='h20Frequency' 
-								value={plantValues.password}
-								onChange={onChange}/>
-						</label>
-						<button disabled={disabled}>Add Plant</button>
-						<div className='errors'> 
-            	<h3>{plantErrors.nickname}</h3>
-							<h3>{plantErrors.species}</h3>
-							<h3>{plantErrors.h20Frequency}</h3>
-            </div>
-					</form>
-			</div>
+			<form className='newPlantContainer' onSubmit={onSubmit}>
+				<h2>Add a New Plant</h2>
+				<label>Nickname:
+					<input 
+						id='nicknameInput' 
+						type='text' 
+						name='nickname' 
+						value={plantValues.nickname}
+						onChange={onChange}/>
+				</label>
+				<label>Plant Species:
+					<input 
+						id='speciesInput' 
+						type='text' 
+						name='species' 
+						value={plantValues.phoneNum}
+						onChange={onChange}/>
+				</label>
+				<label>Watering Frequency:
+					<input 
+						id='h20FrequencyInput' 
+						type='text' 
+						name='h20Frequency' 
+						value={plantValues.password}
+						onChange={onChange}/>
+				</label>
+				<button disabled={disabled}>Add Plant</button>
+				<div className='errors'> 
+					<h3>{plantErrors.nickname}</h3>
+					<h3>{plantErrors.species}</h3>
+					<h3>{plantErrors.h20Frequency}</h3>
+				</div>
+			</form>
+		</div>
 	)
 }
