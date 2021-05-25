@@ -96,9 +96,9 @@ export default function Login() {
         </label>
         <button disabled={disabled}>Log In</button>
         <div className="errors">
-          <h3>{formErrors.nickname}</h3>
-          <h3>{formErrors.species}</h3>
-          <h3>{formErrors.h20Frequency}</h3>
+          <h3>{formErrors.name}</h3>
+          <h3>{formErrors.phoneNum}</h3>
+          <h3>{formErrors.password}</h3>
         </div>
       </form>
     </div>
