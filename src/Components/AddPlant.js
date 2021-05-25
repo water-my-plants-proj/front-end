@@ -77,7 +77,7 @@ export default function AddPlant(){
 								id='speciesInput' 
 								type='text' 
 								name='species' 
-								value={plantValues.phoneNum}
+								value={plantValues.species}
 								onChange={onChange}/>
 						</label>
 						<label>Watering Frequency:
@@ -85,7 +85,7 @@ export default function AddPlant(){
 								id='h20FrequencyInput' 
 								type='text' 
 								name='h20Frequency' 
-								value={plantValues.password}
+								value={plantValues.h20Frequency}
 								onChange={onChange}/>
 						</label>
 						<button disabled={disabled}>Add Plant</button>
