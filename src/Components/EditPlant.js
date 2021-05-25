@@ -1,6 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles';
 import PlantCard from './PlantCard';
+import { useHistory } from 'react-router-dom';
+
 const styles= makeStyles({
     container:{
     },
@@ -29,16 +31,20 @@ const styles= makeStyles({
     }
 })
 export default function EditPlant(props) {
+    console.log(props)
     const {edit}= props
+    const { push } = useHistory();
+
     const handleSubmit=(e)=>{
         e.preventDefault()
         edit(false)
+        push('/plant-list')
     }
 const classes=styles()
     return (
         <div className={classes.container} >
             {/* <h2>Edit Your {props.plant.species} </h2> */}
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={handleSubmit} >
                 <labe className={classes.label}> Species:
                 <input className={classes.species}/>
                 </labe>
