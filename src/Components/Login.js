@@ -128,7 +128,7 @@ export default function Login() {
             onChange={onChange}
           />
         </label>
-        <div>
+        <div className="buttonContainer">
           <button disabled={disabled}>Log In</button>
         </div>
 
