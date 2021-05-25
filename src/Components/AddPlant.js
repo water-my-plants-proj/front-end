@@ -21,13 +21,13 @@ export default function AddPlant(){
 
 	const [plantValues, setPlantValues] = useState(initialPlantValues);
 	const [disabled, setDisabled] = useState(initialDisabled);   
-	const [formErrors, setPlantErrors] = useState(initialPlantErrors);
+	const [plantErrors, setPlantErrors] = useState(initialPlantErrors);
 
 	const validate = (name, value) => {
     yup.reach(schema, name)
       .validate(value)
-      .then(() => setPlantErrors({ ...formErrors, [name]: ''}))
-      .catch(err => setPlantErrors({ ...formErrors, [name]: err.errors[0]}))
+      .then(() => setPlantErrors({ ...plantErrors, [name]: ''}))
+      .catch(err => setPlantErrors({ ...plantErrors, [name]: err.errors[0]}))
   }
 
 	const addPlantSubmit = () => {
@@ -89,6 +89,11 @@ export default function AddPlant(){
 								onChange={onChange}/>
 						</label>
 						<button disabled={disabled}>Add Plant</button>
+						<div className='errors'> 
+            <h3>{plantErrors.nickname}</h3>
+						<h3>{plantErrors.species}</h3>
+						<h3>{plantErrors.h20Frequency}</h3>
+            </div>
 					</form>
 			</div>
 	)
