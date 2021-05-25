@@ -9,12 +9,12 @@ import schema from "../validation/AddPlantSchema";
 const initialPlantValues = {
   nickname: "",
   species: "",
-  h20Frequency: "",
+  h2OFrequency: "",
 };
 const initialPlantErrors = {
   nickname: "",
   species: "",
-  h20Frequency: "",
+  h2OFrequency: "",
 };
 const initialDisabled = true;
 
@@ -37,7 +37,7 @@ export default function AddPlant() {
     const newPlant = {
       nickname: plantValues.nickname.trim(),
       species: plantValues.species.trim(),
-      h20Frequency: plantValues.h20Frequency.trim(),
+      h2OFrequency: plantValues.h2OFrequency.trim(),
     };
     console.log(newPlant);
     //this information will need to be posted to the end point
@@ -90,10 +90,10 @@ export default function AddPlant() {
         <label>
           Watering Frequency:
           <input
-            id="h20FrequencyInput"
+            id="h2OFrequencyInput"
             type="text"
-            name="h20Frequency"
-            value={plantValues.h20Frequency}
+            name="h2OFrequency"
+            value={plantValues.h2OFrequency}
             onChange={onChange}
           />
         </label>
@@ -101,7 +101,7 @@ export default function AddPlant() {
         <div className="errors">
           <h3>{plantErrors.nickname}</h3>
           <h3>{plantErrors.species}</h3>
-          <h3>{plantErrors.h20Frequency}</h3>
+          <h3>{plantErrors.h2OFrequency}</h3>
         </div>
       </form>
     </div>
