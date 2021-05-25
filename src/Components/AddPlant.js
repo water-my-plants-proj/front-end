@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import schema from "../validation/AddPlantSchema";
+import styled from "styled-components";
 
 const initialPlantValues = {
   nickname: "",
@@ -17,6 +18,39 @@ const initialPlantErrors = {
   h2OFrequency: "",
 };
 const initialDisabled = true;
+
+const StyledFormAddPlant = styled.div`
+  display: flex;
+  justify-content: center;
+  border: 2px solid green;
+  .newPlantContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h2 {
+    margin: 0 auto;
+    margin-bottom: 2%;
+  }
+  button {
+    width: 40%;
+    color: green;
+  }
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  .errors {
+    display: flex;
+    color: red;
+    font-size: 0.5rem;
+  }
+`;
 
 export default function AddPlant() {
   const [plantValues, setPlantValues] = useState(initialPlantValues);
@@ -64,7 +98,7 @@ export default function AddPlant() {
   }, [plantValues]);
 
   return (
-    <div>
+    <StyledFormAddPlant>
       <form className="newPlantContainer" onSubmit={onSubmit}>
         <h2>Add a New Plant</h2>
         <label>
@@ -97,13 +131,15 @@ export default function AddPlant() {
             onChange={onChange}
           />
         </label>
-        <button disabled={disabled}>Add Plant</button>
+        <div className="buttonContainer">
+          <button disabled={disabled}>Add Plant</button>
+        </div>
         <div className="errors">
           <h3>{plantErrors.nickname}</h3>
           <h3>{plantErrors.species}</h3>
           <h3>{plantErrors.h2OFrequency}</h3>
         </div>
       </form>
-    </div>
+    </StyledFormAddPlant>
   );
 }
