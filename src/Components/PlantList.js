@@ -25,9 +25,13 @@ title:{
 
 })
 export default function PlantList() {
+    const[plantList,setPlantList]=useState(DummyData)
     const[edit,setEdit]= useState(false)
+    const[plantToEdit,setPlantToEdit]= useState(null)
+
     const returnPlantId= (id)=>{
         setEdit(true)
+        setPlantToEdit(plantList[id])
         return id
     }
 const classes=styles()
@@ -40,11 +44,11 @@ const classes=styles()
        
         <div className={classes.PlantList}>
             
-            {DummyData.map((item)=>{
+            {plantList.map((item)=>{
                 return(<h3><PlantCard plant={item} edit={returnPlantId}/> </h3>)
     })}
         </div>
-        {edit===true?<EditPlant edit={setEdit}/>:<></>}
+        {edit===true?<EditPlant plantList={plantList} setPlantList={setPlantList} plantToEdit={plantToEdit} edit={setEdit}/>:<></>}
         </div>
         </div>
         
