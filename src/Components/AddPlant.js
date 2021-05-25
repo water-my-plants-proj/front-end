@@ -90,9 +90,9 @@ export default function AddPlant(){
 						</label>
 						<button disabled={disabled}>Add Plant</button>
 						<div className='errors'> 
-            <h3>{plantErrors.nickname}</h3>
-						<h3>{plantErrors.species}</h3>
-						<h3>{plantErrors.h20Frequency}</h3>
+            	<h3>{plantErrors.nickname}</h3>
+							<h3>{plantErrors.species}</h3>
+							<h3>{plantErrors.h20Frequency}</h3>
             </div>
 					</form>
 			</div>
