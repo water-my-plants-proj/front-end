@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import schema from "../validation/AddPlantSchema";
+import styled from "styled-components";
 
 const initialPlantValues = {
   nickname: "",
@@ -18,6 +19,39 @@ const initialPlantErrors = {
 };
 const initialDisabled = true;
 
+const StyledFormAddPlant = styled.div`
+  display: flex;
+  justify-content: center;
+  border: 2px solid green;
+  .newPlantContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h2 {
+    margin: 0 auto;
+    margin-bottom: 2%;
+  }
+  button {
+    width: 40%;
+    color: green;
+  }
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  .errors {
+    display: flex;
+    color: red;
+    font-size: 0.5rem;
+  }
+`;
+
 export default function AddPlant() {
   const [plantValues, setPlantValues] = useState(initialPlantValues);
   const [disabled, setDisabled] = useState(initialDisabled);
@@ -29,7 +63,7 @@ export default function AddPlant() {
       .validate(value)
       .then(() => setPlantErrors({ ...plantErrors, [name]: "" }))
       .catch((err) =>
-        setPlantErrors({ ...plantErrors, [name]: err.errors[0] })
+        setPlantErrors({ ...plantErrors, [name]: "-" + err.errors[0] })
       );
   };
 
@@ -63,42 +97,49 @@ export default function AddPlant() {
     schema.isValid(plantValues).then((valid) => setDisabled(!valid));
   }, [plantValues]);
 
-
-	return (
-		<div>
-			<form className='newPlantContainer' onSubmit={onSubmit}>
-				<h2>Add a New Plant</h2>
-				<label>Nickname:
-					<input 
-						id='nicknameInput' 
-						type='text' 
-						name='nickname' 
-						value={plantValues.nickname}
-						onChange={onChange}/>
-				</label>
-				<label>Plant Species:
-					<input 
-						id='speciesInput' 
-						type='text' 
-						name='species' 
-						value={plantValues.phoneNum}
-						onChange={onChange}/>
-				</label>
-				<label>Watering Frequency:
-					<input 
-						id='h20FrequencyInput' 
-						type='text' 
-						name='h20Frequency' 
-						value={plantValues.password}
-						onChange={onChange}/>
-				</label>
-				<button disabled={disabled}>Add Plant</button>
-				<div className='errors'> 
-					<h3>{plantErrors.nickname}</h3>
-					<h3>{plantErrors.species}</h3>
-					<h3>{plantErrors.h20Frequency}</h3>
-				</div>
-			</form>
-		</div>
-	)
+  return (
+    <StyledFormAddPlant>
+      <form className="newPlantContainer" onSubmit={onSubmit}>
+        <h2>Add a New Plant</h2>
+        <label>
+          Nickname:
+          <input
+            id="nicknameInput"
+            type="text"
+            name="nickname"
+            value={plantValues.nickname}
+            onChange={onChange}
+          />
+        </label>
+        <label>
+          Plant Species:
+          <input
+            id="speciesInput"
+            type="text"
+            name="species"
+            value={plantValues.phoneNum}
+            onChange={onChange}
+          />
+        </label>
+        <label>
+          Watering Frequency:
+          <input
+            id="h2OFrequencyInput"
+            type="text"
+            name="h2OFrequency"
+            value={plantValues.password}
+            onChange={onChange}
+          />
+        </label>
+        <div className="buttonContainer">
+          <button disabled={disabled}>Add Plant</button>
+        </div>
+        <div className="errors">
+          <h3>{plantErrors.nickname}</h3>
+          <h3>{plantErrors.species}</h3>
+          <h3>{plantErrors.h2OFrequency}</h3>
+        </div>
+      </form>
+    </StyledFormAddPlant>
+  );
 }
