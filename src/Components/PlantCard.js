@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 
 export default function PlantCard(props) {
-    const { plant } = props
+    const { plant,edit } = props
     const Styles = makeStyles({
         Cont:{
             border:"10px solid green",
@@ -38,6 +38,11 @@ export default function PlantCard(props) {
             marginLeft:"10%"
         }
         })
+
+        const handleClick=(e)=>{
+            e.preventDefault()
+            edit(plant.id)
+        }
    
         const classes = Styles()
     return (
@@ -46,7 +51,7 @@ export default function PlantCard(props) {
             <p className={classes.text}> Species: {plant.species}</p>
             <p className={classes.text}> Nickname:{plant.nickname}</p>
             <p className={classes.text}> Watering Frequency:{plant.h20Frequency}</p>
-            <button className={classes.edit}>Edit</button>
+            <button onClick={handleClick} className={classes.edit}>Edit</button>
             </div>
             <div className={classes.imgCont}>
              <img className={classes.img} src={plant.image}></img>

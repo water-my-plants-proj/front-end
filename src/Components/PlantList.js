@@ -1,8 +1,13 @@
-import React from 'react'
+import React,{useState} from 'react'
 import DummyData from '../DummyData'
 import PlantCard from './PlantCard'
 import { makeStyles } from '@material-ui/styles';
+import EditPlant from './EditPlant'
 const styles = makeStyles({
+plantPage:{
+    display:"flex",
+    flexDirection:"row",
+},
 PlantList:{
     border:"1px solid red",
     width:"50%",
@@ -20,17 +25,26 @@ title:{
 
 })
 export default function PlantList() {
+    const[edit,setEdit]= useState(false)
+    const returnPlantId= (id)=>{
+        setEdit(true)
+        return id
+    }
 const classes=styles()
     return (
         <div>
         <div className={classes.title}>
-            <h3 className={classes.header}>Welcome to your Plant List</h3>
-            </div>
+        <h3 className={classes.header}>Welcome to your Plant List</h3>
+        </div>
+        <div className={classes.plantPage}>
+       
         <div className={classes.PlantList}>
             
             {DummyData.map((item)=>{
-                return(<h3><PlantCard plant={item}/> </h3>)
+                return(<h3><PlantCard plant={item} edit={returnPlantId}/> </h3>)
     })}
+        </div>
+        {edit===true?<EditPlant edit={setEdit}/>:<></>}
         </div>
         </div>
         
