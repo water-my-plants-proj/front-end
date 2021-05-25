@@ -9,7 +9,7 @@ export const DummyData = [
     {
         id:1,
         species:"Cactus",
-        nickname:"spinny",
+        nickname:"Spiney",
         h20Frequency:1,
         image:'https://assets.pbimgs.com/pbimgs/ab/images/dp/wcm/202109/2404/img96o.jpg'
     },

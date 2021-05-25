@@ -1,5 +1,6 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { makeStyles } from '@material-ui/styles';
+
 import PlantCard from './PlantCard';
 import { useHistory } from 'react-router-dom';
 
@@ -32,29 +33,67 @@ const styles= makeStyles({
 })
 export default function EditPlant(props) {
     console.log(props)
-    const {edit}= props
-    const { push } = useHistory();
 
+    const {edit,plantToEdit,setPlantList,plantList}= props
+    const [CValue,setCValue]=useState(plantToEdit)
     const handleSubmit=(e)=>{
-        e.preventDefault()
-        edit(false)
+        e.preventDefault();
+        edit(false);
+        const update = plantList.filter((item)=>{return item.id!==plantToEdit.id})
+        setPlantList([
+            CValue,...update
+        ])
         push('/plant-list')
     }
+    const handleChange=(e)=>{
+        e.preventDefault()
+        const{name,value}=e.target
+        setCValue({
+      ...CValue,
+      [name]:value      
+    })}
 const classes=styles()
     return (
         <div className={classes.container} >
             {/* <h2>Edit Your {props.plant.species} </h2> */}
-            <form className={classes.form} onSubmit={handleSubmit} >
-                <labe className={classes.label}> Species:
-                <input className={classes.species}/>
-                </labe>
+            <form onSubmit={handleSubmit} className={classes.form}>
+                <label
+                 className={classes.label}
+                 > Species:
+
+                <input
+                 className={classes.species}
+                 onChange={handleChange}
+                 value={CValue.species}
+                 name="species"
+                 />
+                </label>
                 <label className={classes.label}> Nickname:
-                <input className={classes.nickname}/>
+
+                <input
+                 className={classes.nickname}
+                 onChange={handleChange}
+                 value={CValue.nickname}
+                 name="nickname"
+                 />
+
                 </label>
-                <label className={classes.label}> Watering Frequency:
-                <input className={classes.water}/>
+
+                <label
+                 className={classes.label}
+                 > Watering Frequency:
+
+                <input
+                 className={classes.water}
+                 onChange={handleChange}
+                 value={CValue.h20Frequency}
+                 name="h20Frequency"
+                 />
+
                 </label>
+
                 <button className={classes.submit}>submit</button>
+
             </form>
         </div>
     )
