@@ -7,7 +7,7 @@ const axiosWithAuth = () => {
         headers: {
             authorization: token
         },
-        baseURL: 'https://plantszapi.herokuapp.com/'
+        baseURL: 'https://plantszapi.herokuapp.com/api'
     });
 }
 
