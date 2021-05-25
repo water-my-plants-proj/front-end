@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import * as yup from 'yup'
 import schema from '../validation/LoginSchema'
 
@@ -13,7 +13,6 @@ const initialLoginErrors = {
 	password: ''
 }
 const initialDisabled = true;
-
 
 export default function Login() {   //removed props, dont know what will be passed in
 	const [loginValues, setLoginValues] = useState(initialLoginValues);
@@ -56,6 +55,10 @@ export default function Login() {   //removed props, dont know what will be pass
 		inputChange(name, value)
 	}
 
+	useEffect(() => {
+    schema.isValid(loginValues).then((valid) => setDisabled(!valid));
+  }, [loginValues]);
+
 	return (
 		<div>
 			<form className='loginContainer' onSubmit={onSubmit}>
@@ -85,6 +88,11 @@ export default function Login() {   //removed props, dont know what will be pass
 						onChange={onChange} />
 				</label>
 				<button disabled={disabled}>Log In</button>
+				<div className='errors'> 
+          <h3>{formErrors.nickname}</h3>
+					<h3>{formErrors.species}</h3>
+					<h3>{formErrors.h20Frequency}</h3>
+        </div>
 			</form>
 		</div>
 	)
