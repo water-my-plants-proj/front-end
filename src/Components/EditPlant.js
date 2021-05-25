@@ -1,7 +1,5 @@
 import React,{useState} from 'react'
 import { makeStyles } from '@material-ui/styles';
-
-import PlantCard from './PlantCard';
 import { useHistory } from 'react-router-dom';
 
 const styles= makeStyles({
@@ -33,9 +31,10 @@ const styles= makeStyles({
 })
 export default function EditPlant(props) {
     console.log(props)
-
     const {edit,plantToEdit,setPlantList,plantList}= props
     const [CValue,setCValue]=useState(plantToEdit)
+    const { push } = useHistory();
+
     const handleSubmit=(e)=>{
         e.preventDefault();
         edit(false);

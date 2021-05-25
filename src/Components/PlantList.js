@@ -25,15 +25,16 @@ title:{
 
 })
 export default function PlantList() {
-    const[plantList,setPlantList]=useState(DummyData)
-    const[edit,setEdit]= useState(false)
-    const[plantToEdit,setPlantToEdit]= useState(null)
+    const [plantList, setPlantList ] = useState(DummyData)
+    const [ edit, setEdit ] = useState(false)
+    const [ plantToEdit, setPlantToEdit ] = useState(null)
 
-    const returnPlantId= (id)=>{
+    const returnPlantId = (id)=>{
         setEdit(true)
         setPlantToEdit(plantList[id])
         return id
     }
+
 const classes=styles()
     return (
         <div>

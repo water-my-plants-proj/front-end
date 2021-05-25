@@ -1,11 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
-import { useHistory } from 'react-router-dom'
 
 export default function PlantCard(props) {
     const { plant,edit } = props
-    const { push } = useHistory();
-
     const Styles = makeStyles({
         Cont:{
             border:"10px solid green",
@@ -45,9 +42,7 @@ export default function PlantCard(props) {
         const handleClick=(e)=>{
             e.preventDefault()
             edit(plant.id)
-            push('/edit-plant')
-        }
-   
+        }  
         const classes = Styles()
     return (
         <div className={classes.Cont}>
