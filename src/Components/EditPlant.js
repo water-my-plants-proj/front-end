@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
 import { makeStyles } from '@material-ui/styles';
+import { useHistory } from 'react-router-dom';
+
 const styles= makeStyles({
     container:{
         width: "50%",
@@ -48,7 +50,6 @@ const styles= makeStyles({
 export default function EditPlant(props) {
     const {edit,plantToEdit,setPlantList,plantList}= props
     const [CValue,setCValue]=useState(plantToEdit)
-
     const handleSubmit=(e)=>{
         e.preventDefault();
         console.log(plantList)
@@ -83,9 +84,7 @@ const classes=styles()
                  value={CValue.species}
                  name="species"
                  />
-
                 </label>
-
                 <label className={classes.label}> Nickname:
 
                 <input

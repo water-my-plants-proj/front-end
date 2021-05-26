@@ -42,8 +42,7 @@ export default function PlantCard(props) {
         const handleClick=(e)=>{
             e.preventDefault()
             edit(plant.id)
-        }
-   
+        }  
         const classes = Styles()
     return (
         <div className={classes.Cont}>
