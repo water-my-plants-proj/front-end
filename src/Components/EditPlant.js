@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { makeStyles } from '@material-ui/styles';
 import { useHistory } from 'react-router-dom';
-
+import {connect} from 'react-redux'
 const styles= makeStyles({
     container:{
         width: "50%",
@@ -47,7 +47,7 @@ const styles= makeStyles({
         fontSize:"1.5rem"
     }
 })
-export default function EditPlant(props) {
+    function EditPlant(props) {
     const {edit,plantToEdit,setPlantList,plantList}= props
     const [CValue,setCValue]=useState(plantToEdit)
     const handleSubmit=(e)=>{
@@ -117,3 +117,4 @@ const classes=styles()
         </div>
     )
 }
+export default connect()(EditPlant)

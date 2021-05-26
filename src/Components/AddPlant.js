@@ -6,11 +6,11 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import schema from "../validation/AddPlantSchema";
 import styled from "styled-components";
-
+import axiosWithAuth from "../Utils/AxiosWithAuth"
 const initialPlantValues = {
-  nickname: "",
-  species: "",
-  h2OFrequency: "",
+  "nickname": "",
+  "species": "",
+  "h2OFrequency": "",
 };
 const initialPlantErrors = {
   nickname: "",
@@ -67,21 +67,25 @@ export default function AddPlant() {
       );
   };
 
-  const addPlantSubmit = () => {
     const newPlant = {
       nickname: plantValues.nickname.trim(),
       species: plantValues.species.trim(),
-      h2OFrequency: plantValues.h2OFrequency.trim(),
-    };
+      h2OFrequency: plantValues.h2OFrequency.trim(),}
+   
     console.log(newPlant);
     //this information will need to be posted to the end point
-  };
+
   const onSubmit = (evt) => {
+    console.log(newPlant)
     evt.preventDefault();
-    addPlantSubmit(); //not sure how this will need to be set up
+    axiosWithAuth().post("/plants/plants",newPlant)
+    .then((res)=>{
+      console.log(res)
+    })
   };
 
   const inputChange = (name, value) => {
+    console.log(name)
     validate(name, value);
     setPlantValues({
       ...plantValues,
