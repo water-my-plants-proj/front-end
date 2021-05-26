@@ -2,8 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 
 export default function PlantCard(props) {
-    const { plant,edit } = props
-    console.log(plant)
+    const { plant,returnPlantId} = props
     const Styles = makeStyles({
         Cont:{
             border:"10px solid green",
@@ -42,7 +41,7 @@ export default function PlantCard(props) {
 
         const handleClick=(e)=>{
             e.preventDefault()
-            edit(plant.id)
+            returnPlantId(plant.plant_id)
         }  
         const classes = Styles()
     return (

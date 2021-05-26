@@ -12,7 +12,6 @@ export const fetchPlants= (url) => {
         .get(url)
         .then(res => {
         dispatch({type: FETCH_SUCCESS, payload:res.data});
-        console.log(res)
         })
         .catch(err => {
             console.log("ERROR", err)
