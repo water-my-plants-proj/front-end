@@ -80,13 +80,13 @@ const test={
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    push("/plant-list")
+    
     props.setLoggedIn(true);
     axios.post("https://plantszapi.herokuapp.com/api/auth/login",test)
     .then((res)=>{
       console.log(res)
     localStorage.setItem("token",res.data.token)
-      
+    push("/plant-list")
     })
     .catch((err)=>{
       console.log(err)

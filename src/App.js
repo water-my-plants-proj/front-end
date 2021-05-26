@@ -16,7 +16,6 @@ import { connect } from 'react-redux';
 function App(props) {
   const{data}=props
   const[loggedIn,setLoggedIn] =useState(false)
-  const[plants,setPlants] =useState(data)
   return (
     <Router>
       <NavBar setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>

@@ -2,6 +2,9 @@ import React,{useState} from 'react'
 import { makeStyles } from '@material-ui/styles';
 import { useHistory } from 'react-router-dom';
 import {connect} from 'react-redux'
+import axiosWithAuth from '../Utils/AxiosWithAuth';
+import {deletePlant} from '../Actions/Index';
+import{editPlant} from '../Actions/Index'
 
 
 const styles= makeStyles({
@@ -9,6 +12,11 @@ const styles= makeStyles({
         width: "50%",
         backgroundColor:"grey",
        
+    },
+    deletePlant:{
+        margin:"0 auto",
+        marginTop:"10%",
+        marginBottom:"10%"
     },
     sidebar: {
         position:"fixed",
@@ -38,7 +46,7 @@ const styles= makeStyles({
     },
     water:{
         marginBottom:"5%",
-        width:"20%"
+        width:"30%"
     },
     submit:{
         width:"20%",
@@ -47,24 +55,38 @@ const styles= makeStyles({
     },
     label:{
         fontSize:"1.5rem"
-    }
+    },
 })
 
 
     function EditPlant(props) {
-    const {edit,plantToEdit,setPlantList,plantList}= props
+
+    const {edit,plantToEdit,editPlant,deletePlant}= props
+
     const [CValue,setCValue]=useState(plantToEdit)
+
+    const handleDelete=(e)=>{
+        e.preventDefault()
+        deletePlant(plantToEdit.plant_id)
+        edit(false)
+
+    }
+
     const handleSubmit=(e)=>{
         e.preventDefault();
-        const update = plantList.filter((item)=>{ return item.plant_id!==plantToEdit.plant_id})
-        setPlantList([
-            CValue,...update
-        ])
         edit(false);
+        editPlant(CValue)
+        console.log(CValue)
+        axiosWithAuth().put(`/plants/plants/${plantToEdit.plant_id}`)
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>console.log(err))
     }
     const handleChange=(e)=>{
         e.preventDefault()
         const{name,value}=e.target
+        console.log(CValue)
         setCValue({
       ...CValue,
       [name]:value,   
@@ -109,17 +131,23 @@ const classes=styles()
                  className={classes.water}
                  onChange={handleChange}
                  value={CValue.h2oFrequency}
-                 name="h20Frequency"
+                 name="h2oFrequency"
                  />
 
                 </label>
 
-                <button onClick={handleSubmit} className={classes.submit}>submit</button>
-                <button onClick={()=>{edit(false)}} className={classes.submit}>cancel</button>
+               
+             <button onClick={handleSubmit} value="submit" className={classes.submit}>submit</button>
+             <button className={classes.deletePlant} onClick={handleDelete}>delete</button>
+             <button onClick={()=>{edit(false)}} className={classes.submit}>cancel</button>
 
             </form>
             </div> 
         </div>
     )
 }
-export default connect()(EditPlant)
+const mapActionsToProps={
+    deletePlant,
+    editPlant
+}
+export default connect(null,mapActionsToProps)(EditPlant)
