@@ -8,11 +8,26 @@ const StyledEditUserPage = styled.div`
   justify-content: center;
   margin: 0 auto;
 
+  .userCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #52734d;
+    font-size: 0.5rem;
+    background-color: #ddffbc;
+  }
+
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid green;
+    border: 2px solid #52734d;
+    background-color: #ddffbc;
+
+    input {
+      background-color: #feffde;
+    }
 
     h2 {
       margin: 0 auto;
@@ -20,7 +35,8 @@ const StyledEditUserPage = styled.div`
     }
     button {
       width: 40%;
-      color: green;
+      color: #feffde;
+      background-color: #91c788;
     }
     .buttonContainer {
       display: flex;
