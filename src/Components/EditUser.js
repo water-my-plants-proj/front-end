@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import schema from "../validation/EditUserSchema";
+import schema from "./EditUserSchema";
+import * as yup from "yup";
 
 const StyledEditUserPage = styled.div`
   display: flex;
@@ -10,7 +11,28 @@ const StyledEditUserPage = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    border: 2px solid green;
+
+    h2 {
+      margin: 0 auto;
+      margin-bottom: 2%;
+    }
+    button {
+      width: 40%;
+      color: green;
+    }
+    .buttonContainer {
+      display: flex;
+      justify-content: center;
+      margin-top: 2%;
+    }
+    .errors {
+      display: flex;
+      color: red;
+      font-size: 0.5rem;
+      margin-left: 30%;
+    }
   }
 `;
 
@@ -73,8 +95,8 @@ export default function EditUser(props) {
   return (
     <StyledEditUserPage>
       <div className="userCard">
-        <h2>Username: {user.username}</h2>
-        <h2>Password: {user.password}</h2>
+        <h2>Username: test</h2>
+        <h2>Password: test</h2>
       </div>
       <div className="formCard">
         <form onSubmit={onSubmit}>
@@ -86,6 +108,7 @@ export default function EditUser(props) {
               value={formValues.username}
               onChange={onChange}
             />
+            <h2 className="errors">{formErrors.username}</h2>
           </label>
           <label>
             Password:
@@ -94,6 +117,7 @@ export default function EditUser(props) {
               value={formValues.password}
               onChange={onChange}
             />
+            <h2 className="errors">{formErrors.password}</h2>
           </label>
           <button disabled={disabled}>Submit</button>
         </form>
