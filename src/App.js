@@ -11,9 +11,12 @@ import Login from './Components/Login';
 import NavBar from './Components/NavBar';
 import PlantList from './Components/PlantList';
 import SignUp from './Components/SignUp';
+import { connect } from 'react-redux';
 
-function App() {
+function App(props) {
+  const{data}=props
   const[loggedIn,setLoggedIn] =useState(false)
+  const[plants,setPlants] =useState(data)
   return (
     <Router>
       <NavBar setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
@@ -22,7 +25,7 @@ function App() {
           <EditPlant />
         </Route>
         <Route path='/plant-list'>
-          <PlantList />
+          <PlantList/>
         </Route>
         <Route path='/add-plant'>
           <AddPlant />
@@ -43,5 +46,9 @@ function App() {
     </Router>
   );
 }
-
-export default App;
+const mapStateToProps=(state)=>{
+  return{
+    data:state.plantList
+  }
+}
+export default connect(mapStateToProps,null)(App)

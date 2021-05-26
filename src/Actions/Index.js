@@ -1,5 +1,5 @@
 import axiosWithAuth from '../Utils/AxiosWithAuth';
-
+export const ADD_PLANT = "ADD_PLANT";
 export const SIGN_UP = "SIGN_UP";
 export const LOG_IN = "LOG_IN";
 export const FETCH_START = "FETCH_START";
@@ -37,3 +37,6 @@ export const fetchSuccess = (plantList) => {
 export const fetchFail = (err) => {
     return({type: FETCH_FAIL, payload: err})
 } 
+export const addPlant = (newPlant) => {
+    return({type: ADD_PLANT, payload: newPlant})
+}

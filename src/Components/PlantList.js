@@ -5,7 +5,7 @@ import EditPlant from './EditPlant';
 import {connect} from 'react-redux'
 import {fetchPlants} from '../Actions/Index';
 import {useHistory} from 'react-router-dom';
-
+import axios from 'axios'
 const styles = makeStyles({
 plantPage:{
     display:"flex",

@@ -7,7 +7,7 @@ const addPlantSchema = yup.object().shape({
     .min(2, "No species names exist shorter than 2 characters")
     .trim()
     .required("Your plant must be given a species"),
-  h2OFrequency: yup
+  h2oFrequency: yup
     .string()
     .trim()
     .required("Your plant must be given a watering schedule"),
