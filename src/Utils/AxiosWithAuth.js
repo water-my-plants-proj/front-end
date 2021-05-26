@@ -8,6 +8,7 @@ const axiosWithAuth = () => {
         },
         baseURL: 'https://plantszapi.herokuapp.com/api'
     });
+ 
 }
 
 export default axiosWithAuth;

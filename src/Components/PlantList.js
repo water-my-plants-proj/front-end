@@ -1,8 +1,11 @@
-import React,{useState} from 'react'
-import DummyData from '../DummyData'
+import React,{useState,useEffect} from 'react'
 import PlantCard from './PlantCard'
 import { makeStyles } from '@material-ui/styles';
-import EditPlant from './EditPlant'
+import EditPlant from './EditPlant';
+import {connect} from 'react-redux'
+import {fetchPlants} from '../Actions/Index';
+import {useHistory} from 'react-router-dom';
+
 const styles = makeStyles({
 plantPage:{
     display:"flex",
@@ -23,23 +26,35 @@ title:{
 }
 
 })
-export default function PlantList() {
-    const [plantList, setPlantList ] = useState(DummyData)
+function PlantList(props) {
+    console.log(props)
+    const {push}=useHistory()
+    const {fetchPlants}= props
+    useEffect(() => {
+        fetchPlants("/plants/plants")
+    },[])
+
+    const [plantList, setPlantList ] = useState(props.data)
     const [ edit, setEdit ] = useState(false)
     const [ plantToEdit, setPlantToEdit ] = useState(null)
+    const handleAdd=(e)=>{
+        e.preventDefault()
+        push("/add-plant")
+    }
 
     const returnPlantId = (id)=>{
         setEdit(true)
         setPlantToEdit(plantList[id])
-        console.log(id)
         return id
     }
 
 const classes=styles()
+
     return (
         <div>
         <div className={classes.title}>
         <h3 className={classes.header}>Welcome to your Plant List</h3>
+        <button onClick={handleAdd}>Add Plant</button>
         </div>
         <div className={classes.plantPage}>
        
@@ -55,5 +70,16 @@ const classes=styles()
         
     )
 }
+
+const mapStateToProps=(state)=>{
+return{
+    data:state.plantList
+}
+}
+const mapActionsToProps={
+fetchPlants,
+}
+
+export default connect(mapStateToProps,mapActionsToProps)(PlantList)
 
 
