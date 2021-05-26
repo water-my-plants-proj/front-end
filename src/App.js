@@ -14,7 +14,6 @@ import SignUp from './Components/SignUp';
 
 function App() {
   const[loggedIn,setLoggedIn] =useState(false)
-  console.log(loggedIn)
   return (
     <Router>
       <NavBar setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>

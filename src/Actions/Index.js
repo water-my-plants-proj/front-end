@@ -5,14 +5,13 @@ export const LOG_IN = "LOG_IN";
 export const FETCH_START = "FETCH_START";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAIL = "FETCH_FAIL";
-export const fetchPlants= () => {
+export const fetchPlants= (url) => {
     return(dispatch => {
         dispatch(fetchStart());
-
        axiosWithAuth()
-        .get('https://plantszapi.herokuapp.com/')
+        .get(url)
         .then(res => {
-        dispatch({type: FETCH_SUCCESS, payload:"" /*figure out what payload will be */});
+        dispatch({type: FETCH_SUCCESS, payload:res.data});
         console.log(res)
         })
         .catch(err => {

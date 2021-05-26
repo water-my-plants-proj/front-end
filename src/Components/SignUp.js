@@ -11,7 +11,6 @@ const initialValue={
 export default function SignUp() {
 	const {push}=useHistory()
 	const [signUpValues, setSignUp] = useState(initialValue);
-	console.log(signUpValues)
 	const onSubmit = e => {
 		 e.preventDefault()
     	 axios.post("https://plantszapi.herokuapp.com/api/auth/register",signUpValues)
@@ -31,7 +30,6 @@ export default function SignUp() {
 			[name]: value
 		})
 	}
-    console.log(signUpValues.phoneNumber)
 	return (
 
 		<div>
