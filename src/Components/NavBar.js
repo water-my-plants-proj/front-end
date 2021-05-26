@@ -6,7 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {useHistory } from 'react-router-dom'
 export default function NavBar(props) {
   const{push}=useHistory()
-const{loggedIn}=props
+const{loggedIn,setLoggedIn}=props
   const useStyles = makeStyles({
     nav: {
       background: 'linear-gradient(45deg,#00cc00  10%, #008000 40%)',
@@ -48,6 +48,7 @@ const{loggedIn}=props
   const handleLogout=()=> {
     push("/")
     handleClose()
+    setLoggedIn(false)
     
   }
   const handleLogin=()=> {

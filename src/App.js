@@ -17,7 +17,7 @@ function App() {
   console.log(loggedIn)
   return (
     <Router>
-      <NavBar loggedIn={loggedIn}/>
+      <NavBar setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
       <Switch>
         <Route path='/edit-plant'>
           <EditPlant />
