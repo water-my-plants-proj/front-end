@@ -3,24 +3,24 @@ import React,{useState} from 'react'
 import axiosWithAuth from '../Utils/AxiosWithAuth';
 import {useHistory} from 'react-router-dom'
 const initialValue={
-    username: "Joe",
-    password: "1234",
-    phoneNumber:"775-123-1456"
+    username: "Test",
+    password: "Password",
+    phoneNumber:"123-123-1234"
 }
 
 export default function SignUp() {
 	const {push}=useHistory()
 	const [signUpValues, setSignUp] = useState(initialValue);
-
+	console.log(signUpValues)
 	const onSubmit = e => {
-		// e.preventDefault()
-        // axiosWithAuth().post("auth/register",signUpValues)
-        // .then((res) => {
-        //     console.log(res)
-        // })
-        // .catch((err) => {
-        //     console.log(err)
-        // })
+		 e.preventDefault()
+    	 axios.post("https://plantszapi.herokuapp.com/api/auth/register",signUpValues)
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+         })
 		push("/plant-list")
 	}
 

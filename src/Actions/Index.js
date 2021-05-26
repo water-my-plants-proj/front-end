@@ -12,7 +12,8 @@ export const fetchPlants= () => {
        axiosWithAuth()
         .get('https://plantszapi.herokuapp.com/')
         .then(res => {
-        dispatch({type: FETCH_SUCCESS, payload:"" /*figure out what payload will be */})
+        dispatch({type: FETCH_SUCCESS, payload:"" /*figure out what payload will be */});
+        console.log(res)
         })
         .catch(err => {
             console.log("ERROR", err)
