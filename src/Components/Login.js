@@ -2,18 +2,20 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import schema from "../validation/LoginSchema";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+import {useHistory} from "react-router-dom"
+import axios from "axios"
 
-const initialLoginValues = {
-  username: "test",
-  password: "1234",
-};
+
+const initialLoginValues={
+  "username": "test",
+  "password":"1234"
+}
 const initialLoginErrors = {
   username: "",
   phoneNum: "",
   password: "",
 };
+
 
 const initialDisabled = true;
 
@@ -51,11 +53,11 @@ const StyledFormLogin = styled.div`
 `;
 
 export default function Login(props) {
-  const test = {
-    username: "test",
-    password: "1234",
-  };
-  const { push } = useHistory();
+const test={
+  "username": "test",
+  "password":"1234"
+}
+  const {push}=useHistory()
   //removed props, dont know what will be passed in
   const [loginValues, setLoginValues] = useState(initialLoginValues);
   const [disabled, setDisabled] = useState(initialDisabled); //need to add disabled button functionality based on validation
@@ -77,14 +79,14 @@ export default function Login(props) {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    push("/plant-list");
+    push("/plant-list")
     props.setLoggedIn(true);
-    axios
-      .post("https://plantszapi.herokuapp.com/api/auth/login", test)
-      .then((res) => {
-        localStorage.setItem(res.data.token);
-      })
-      .catch((err) => {});
+    axios.post("https://plantszapi.herokuapp.com/api/auth/login",test)
+    .then((res)=>{
+      localStorage.setItem(res.data.token)
+    })
+    .catch((err)=>{
+    })
   };
 
   const inputChange = (name, value) => {
@@ -102,6 +104,7 @@ export default function Login(props) {
   useEffect(() => {
     schema.isValid(loginValues).then((valid) => setDisabled(!valid));
   }, [loginValues]);
+
 
   return (
     <StyledFormLogin>
