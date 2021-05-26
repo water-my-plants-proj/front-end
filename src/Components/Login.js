@@ -4,16 +4,17 @@ import schema from "../validation/LoginSchema";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+
 const initialLoginValues = {
-  username: "",
-  phoneNum: "",
-  password: "",
+  username: "test",
+  password: "1234",
 };
 const initialLoginErrors = {
   username: "",
   phoneNum: "",
   password: "",
 };
+
 const initialDisabled = true;
 
 const StyledFormLogin = styled.div`
@@ -52,7 +53,6 @@ const StyledFormLogin = styled.div`
 export default function Login(props) {
   const test = {
     username: "test",
-    phoneNumber: 774456474,
     password: "1234",
   };
   const { push } = useHistory();
@@ -74,7 +74,7 @@ export default function Login(props) {
     username: loginValues.username.trim(),
     password: loginValues.password.trim(),
   };
-  console.log(newLogin);
+
   const onSubmit = (evt) => {
     evt.preventDefault();
     push("/plant-list");
@@ -82,12 +82,9 @@ export default function Login(props) {
     axios
       .post("https://plantszapi.herokuapp.com/api/auth/login", test)
       .then((res) => {
-        console.log(res.data.token);
         localStorage.setItem(res.data.token);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   const inputChange = (name, value) => {
