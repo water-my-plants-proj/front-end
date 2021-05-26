@@ -72,11 +72,9 @@ export default function AddPlant() {
       species: plantValues.species.trim(),
       h2OFrequency: plantValues.h2OFrequency.trim(),}
    
-    console.log(newPlant);
     //this information will need to be posted to the end point
 
   const onSubmit = (evt) => {
-    console.log(newPlant)
     evt.preventDefault();
     axiosWithAuth().post("/plants/plants",newPlant)
     .then((res)=>{
@@ -85,7 +83,6 @@ export default function AddPlant() {
   };
 
   const inputChange = (name, value) => {
-    console.log(name)
     validate(name, value);
     setPlantValues({
       ...plantValues,

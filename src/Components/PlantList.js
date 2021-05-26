@@ -31,16 +31,9 @@ title:{
 function PlantList(props) {
     const {push}=useHistory()
     const {fetchPlants}= props
-    console.log(props)
     useEffect(() => {
-        axiosWithAuth().get("/plants/plants")
-        .then((res)=>{
-            console.log(res)
-        })
-        .catch(err=>{
-            console.log(err)
-        })
-    })
+        fetchPlants("/plants/plants")
+    },[])
 
     const [plantList, setPlantList ] = useState(DummyData)
     const [ edit, setEdit ] = useState(false)
@@ -53,7 +46,6 @@ function PlantList(props) {
     const returnPlantId = (id)=>{
         setEdit(true)
         setPlantToEdit(plantList[id])
-        console.log(id)
         return id
     }
 
