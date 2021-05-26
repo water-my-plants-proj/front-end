@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles'
 
 export default function PlantCard(props) {
     const { plant,edit } = props
+    console.log(plant)
     const Styles = makeStyles({
         Cont:{
             border:"10px solid green",
@@ -49,7 +50,7 @@ export default function PlantCard(props) {
             <div className={classes.textCont}>
             <p className={classes.text}> Species: {plant.species}</p>
             <p className={classes.text}> Nickname:{plant.nickname}</p>
-            <p className={classes.text}> Watering Frequency:{plant.h20Frequency}</p>
+            <p className={classes.text}> Watering Frequency:{plant.h2oFrequency}</p>
             <button onClick={handleClick} className={classes.edit}>Edit</button>
             </div>
             <div className={classes.imgCont}>

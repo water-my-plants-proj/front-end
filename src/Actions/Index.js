@@ -11,7 +11,7 @@ export const fetchPlants= (url) => {
        axiosWithAuth()
         .get(url)
         .then(res => {
-        dispatch({type: FETCH_SUCCESS, payload:url});
+        dispatch({type: FETCH_SUCCESS, payload:res.data});
         console.log(res)
         })
         .catch(err => {

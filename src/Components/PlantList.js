@@ -1,11 +1,9 @@
 import React,{useState,useEffect} from 'react'
-import DummyData from '../DummyData'
 import PlantCard from './PlantCard'
 import { makeStyles } from '@material-ui/styles';
 import EditPlant from './EditPlant';
 import {connect} from 'react-redux'
 import {fetchPlants} from '../Actions/Index';
-import axiosWithAuth from '../Utils/AxiosWithAuth';
 import {useHistory} from 'react-router-dom';
 
 const styles = makeStyles({
@@ -29,13 +27,14 @@ title:{
 
 })
 function PlantList(props) {
+    console.log(props)
     const {push}=useHistory()
     const {fetchPlants}= props
     useEffect(() => {
         fetchPlants("/plants/plants")
     },[])
 
-    const [plantList, setPlantList ] = useState(DummyData)
+    const [plantList, setPlantList ] = useState(props.data)
     const [ edit, setEdit ] = useState(false)
     const [ plantToEdit, setPlantToEdit ] = useState(null)
     const handleAdd=(e)=>{
@@ -72,8 +71,10 @@ const classes=styles()
     )
 }
 
-const mapStateToProps=()=>{
-
+const mapStateToProps=(state)=>{
+return{
+    data:state.plantList
+}
 }
 const mapActionsToProps={
 fetchPlants,
