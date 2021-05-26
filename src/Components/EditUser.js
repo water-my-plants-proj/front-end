@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import schema from "./EditUserSchema";
+import schema from "../validation/EditUserSchema";
 import * as yup from "yup";
 
 const StyledEditUserPage = styled.div`
