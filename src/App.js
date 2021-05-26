@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Home from './Components/Home';
 //Routes
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -13,9 +13,11 @@ import PlantList from './Components/PlantList';
 import SignUp from './Components/SignUp';
 
 function App() {
+  const[loggedIn,setLoggedIn] =useState(false)
+  console.log(loggedIn)
   return (
     <Router>
-      <NavBar />
+      <NavBar loggedIn={loggedIn}/>
       <Switch>
         <Route path='/edit-plant'>
           <EditPlant />
@@ -30,7 +32,7 @@ function App() {
           <EditUser />
         </Route>
         <Route path="/login">
-          <Login />
+          <Login setLoggedIn={setLoggedIn} />
         </Route>
         <Route path="/signUp">
           <SignUp/>

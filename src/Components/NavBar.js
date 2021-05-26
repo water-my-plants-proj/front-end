@@ -3,9 +3,10 @@ import { makeStyles } from '@material-ui/styles'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
-
-export default function NavBar() {
-
+import {useHistory } from 'react-router-dom'
+export default function NavBar(props) {
+  const{push}=useHistory()
+const{loggedIn}=props
   const useStyles = makeStyles({
     nav: {
       background: 'linear-gradient(45deg,#00cc00  10%, #008000 40%)',
@@ -21,8 +22,8 @@ export default function NavBar() {
       flexDirection: "row",
       flexWrap: "no-wrap",
       justifyContent: "left",
-      marginBottom:"5%",
-      paddingBottom:"1%",
+      marginBottom: "5%",
+      paddingBottom: "1%",
     },
     Menu: {
       color: "black",
@@ -40,6 +41,25 @@ export default function NavBar() {
     setAnchorEl(null);
   };
 
+  const handlePlants=()=> {
+    handleClose()
+    push("/plant-list")
+  }
+  const handleLogout=()=> {
+    push("/")
+    handleClose()
+    
+  }
+  const handleLogin=()=> {
+    push("/login")
+    handleClose()
+    
+  }
+  const handleAccount=()=> {
+    handleClose()
+    push("/EditUser")
+  }
+
   const standard = useStyles()
   return (
     <div className={standard.nav}>
@@ -55,14 +75,12 @@ export default function NavBar() {
       >
         {/* MenuLinks?! */}
 
+      
+          <MenuItem onClick={handlePlants}>Plants</MenuItem>
 
-        <MenuItem onClick={handleClose}>Plants</MenuItem>
+          {loggedIn==true ?<MenuItem onClick={handleLogout}>LoginOut</MenuItem>:<MenuItem onClick={handleLogin}>LoginIn</MenuItem>}
 
-
-        <MenuItem onClick={handleClose}>LoginOut</MenuItem>
-
-        <MenuItem onClick={handleClose}>Account</MenuItem>
-
+          <MenuItem onClick={handleAccount}>Account</MenuItem>
       </Menu>
     </div>
   )
