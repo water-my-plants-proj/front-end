@@ -59,7 +59,7 @@ const{loggedIn,setLoggedIn}=props
   }
   const handleAccount=()=> {
     handleClose()
-    push("/EditUser")
+    push("/edit-user")
   }
 
   const standard = useStyles()
