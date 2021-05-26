@@ -53,7 +53,7 @@ export default function Login(props) {
   const { push } = useHistory();
   //removed props, dont know what will be passed in
   const [loginValues, setLoginValues] = useState(initialLoginValues);
-  const [disabled, setDisabled] = useState(initialDisabled); //need to add disabled button functionality based on validation
+  const [disabled, setDisabled] = useState(initialDisabled);
   const [formErrors, setFormErrors] = useState(initialLoginErrors);
 
   const validate = (name, value) => {
