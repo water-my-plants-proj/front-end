@@ -1,3 +1,5 @@
+// This still needs to grab user info from state
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import schema from "../validation/EditUserSchema";
@@ -86,6 +88,7 @@ export default function EditUser(props) {
     };
     console.log(newUserData);
     //this information will need to be posted to the end point
+    setFormValues(initialFormValues);
   };
   const onSubmit = (evt) => {
     evt.preventDefault();

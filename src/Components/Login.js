@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import schema from "../validation/LoginSchema";
 import styled from "styled-components";
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 const initialLoginValues = {
   username: "",
@@ -50,8 +50,7 @@ const StyledFormLogin = styled.div`
 `;
 
 export default function Login(props) {
-
-  const {push}=useHistory()
+  const { push } = useHistory();
   //removed props, dont know what will be passed in
   const [loginValues, setLoginValues] = useState(initialLoginValues);
   const [disabled, setDisabled] = useState(initialDisabled); //need to add disabled button functionality based on validation
@@ -76,13 +75,14 @@ export default function Login(props) {
     console.log(newLogin); //token/auth will need to occur here, I think
     //receiving token for auth
     //pages cant be reached without token
+    setLoginValues(initialLoginValues);
   };
 
   const onSubmit = (evt) => {
     evt.preventDefault();
     loginSubmit(); //not sure how this will need to be set up
-    push("/plant-list")
-    props.setLoggedIn(true)
+    push("/plant-list");
+    props.setLoggedIn(true);
   };
 
   const inputChange = (name, value) => {

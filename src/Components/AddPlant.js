@@ -75,6 +75,7 @@ export default function AddPlant() {
     };
     console.log(newPlant);
     //this information will need to be posted to the end point
+    setPlantValues(initialPlantValues);
   };
   const onSubmit = (evt) => {
     evt.preventDefault();
