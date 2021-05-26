@@ -49,7 +49,8 @@ const StyledFormLogin = styled.div`
   }
 `;
 
-export default function Login() {
+export default function Login(props) {
+
   const {push}=useHistory()
   //removed props, dont know what will be passed in
   const [loginValues, setLoginValues] = useState(initialLoginValues);
@@ -81,6 +82,7 @@ export default function Login() {
     evt.preventDefault();
     loginSubmit(); //not sure how this will need to be set up
     push("/plant-list")
+    props.setLoggedIn(true)
   };
 
   const inputChange = (name, value) => {

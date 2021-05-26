@@ -4,12 +4,28 @@ import { useHistory } from 'react-router-dom';
 
 const styles= makeStyles({
     container:{
+        width: "50%",
+        backgroundColor:"grey",
+       
+    },
+    sidebar: {
+        position:"fixed",
+        top:"0.5",
+        border:"2px solid green",
+    },
+    header:{
+        backgroundColor:"green",
+        marginTop:"-2%",
+        width:"90%",
+        margin:"0 auto"
     },
     form:{
         display:"flex",
         flexDirection:"column",
-        border:"1px solid black",
-        alignItems:"center"
+        alignItems:"left",
+        marginTop:"10%",
+        paddingBottom:"30%",
+        paddingTop:"20%",
     },
     species:{
         marginBottom:"5%",
@@ -20,41 +36,43 @@ const styles= makeStyles({
     },
     water:{
         marginBottom:"5%",
-        width:"34%"
+        width:"20%"
     },
     submit:{
-        width:"20%"
+        width:"20%",
+        display: "block",
+        margin: "0 auto"
     },
     label:{
         fontSize:"1.5rem"
     }
 })
 export default function EditPlant(props) {
-    console.log(props)
     const {edit,plantToEdit,setPlantList,plantList}= props
     const [CValue,setCValue]=useState(plantToEdit)
-    const { push } = useHistory();
-
     const handleSubmit=(e)=>{
         e.preventDefault();
-        edit(false);
+        console.log(plantList)
         const update = plantList.filter((item)=>{return item.id!==plantToEdit.id})
         setPlantList([
             CValue,...update
         ])
-        push('/plant-list')
+        edit(false);
     }
     const handleChange=(e)=>{
         e.preventDefault()
         const{name,value}=e.target
         setCValue({
       ...CValue,
-      [name]:value      
+      [name]:value,   
     })}
 const classes=styles()
     return (
         <div className={classes.container} >
-            {/* <h2>Edit Your {props.plant.species} </h2> */}
+            <div className={classes.sidebar}>
+            <div className={classes.header}>
+            <h2>Edit Your {CValue.species} </h2> 
+            </div>
             <form onSubmit={handleSubmit} className={classes.form}>
                 <label
                  className={classes.label}
@@ -91,9 +109,11 @@ const classes=styles()
 
                 </label>
 
-                <button className={classes.submit}>submit</button>
+                <button onClick={handleSubmit} className={classes.submit}>submit</button>
+                <button onClick={()=>{edit(false)}} className={classes.submit}>cancel</button>
 
             </form>
+            </div>
         </div>
     )
 }

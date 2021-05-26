@@ -9,8 +9,7 @@ plantPage:{
     flexDirection:"row",
 },
 PlantList:{
-    border:"1px solid red",
-    width:"50%",
+    width:"100%",
     backgroundColor:"grey"
 },
 header:{
@@ -32,6 +31,7 @@ export default function PlantList() {
     const returnPlantId = (id)=>{
         setEdit(true)
         setPlantToEdit(plantList[id])
+        console.log(id)
         return id
     }
 
@@ -46,7 +46,7 @@ const classes=styles()
         <div className={classes.PlantList}>
             
             {plantList.map((item)=>{
-                return(<h3><PlantCard plant={item} edit={returnPlantId}/> </h3>)
+                return(<h3><PlantCard key ={item.id} plant={item} edit={returnPlantId}/> </h3>)
     })}
         </div>
         {edit===true?<EditPlant plantList={plantList} setPlantList={setPlantList} plantToEdit={plantToEdit} edit={setEdit}/>:<></>}
