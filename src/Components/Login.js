@@ -3,7 +3,7 @@ import * as yup from "yup";
 import schema from "../validation/LoginSchema";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-
+import axios from "axios";
 const initialLoginValues = {
   username: "",
   phoneNum: "",
@@ -50,10 +50,15 @@ const StyledFormLogin = styled.div`
 `;
 
 export default function Login(props) {
+  const test = {
+    username: "test",
+    phoneNumber: 774456474,
+    password: "1234",
+  };
   const { push } = useHistory();
   //removed props, dont know what will be passed in
   const [loginValues, setLoginValues] = useState(initialLoginValues);
-  const [disabled, setDisabled] = useState(initialDisabled);
+  const [disabled, setDisabled] = useState(initialDisabled); //need to add disabled button functionality based on validation
   const [formErrors, setFormErrors] = useState(initialLoginErrors);
 
   const validate = (name, value) => {
@@ -65,24 +70,24 @@ export default function Login(props) {
         setFormErrors({ ...formErrors, [name]: "-" + err.errors[0] })
       );
   };
-
-  const loginSubmit = () => {
-    const newLogin = {
-      username: loginValues.username.trim(),
-      phoneNum: loginValues.phoneNum.trim(),
-      password: loginValues.password.trim(),
-    };
-    console.log(newLogin); //token/auth will need to occur here, I think
-    //receiving token for auth
-    //pages cant be reached without token
-    setLoginValues(initialLoginValues);
+  const newLogin = {
+    username: loginValues.username.trim(),
+    password: loginValues.password.trim(),
   };
-
+  console.log(newLogin);
   const onSubmit = (evt) => {
     evt.preventDefault();
-    loginSubmit(); //not sure how this will need to be set up
     push("/plant-list");
     props.setLoggedIn(true);
+    axios
+      .post("https://plantszapi.herokuapp.com/api/auth/login", test)
+      .then((res) => {
+        console.log(res.data.token);
+        localStorage.setItem(res.data.token);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const inputChange = (name, value) => {
@@ -116,16 +121,6 @@ export default function Login(props) {
           />
         </label>
         <label>
-          Phone Number:
-          <input
-            id="phoneNumInput"
-            type="text"
-            name="phoneNum"
-            value={loginValues.phoneNum}
-            onChange={onChange}
-          />
-        </label>
-        <label>
           Password:
           <input
             id="passwordInput"
@@ -141,7 +136,6 @@ export default function Login(props) {
 
         <div className="errors">
           <h3>{formErrors.username}</h3>
-          <h3>{formErrors.phoneNum}</h3>
           <h3>{formErrors.password}</h3>
         </div>
       </form>
