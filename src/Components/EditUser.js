@@ -1,4 +1,5 @@
 // This still needs to grab user info from state
+// quick pulled from main
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
