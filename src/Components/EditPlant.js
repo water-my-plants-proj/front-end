@@ -56,7 +56,7 @@ const styles= makeStyles({
     const [CValue,setCValue]=useState(plantToEdit)
     const handleSubmit=(e)=>{
         e.preventDefault();
-        const update = plantList.filter((item)=>{return item.id!==plantToEdit.id})
+        const update = plantList.filter((item)=>{ return item.plant_id!==plantToEdit.plant_id})
         setPlantList([
             CValue,...update
         ])
@@ -74,7 +74,7 @@ const styles= makeStyles({
 const classes=styles()
     return (
         <div className={classes.container} >
-            <div className={classes.sidebar}>
+             <div className={classes.sidebar}>
             <div className={classes.header}>
             <h2>Edit Your {CValue.species} </h2> 
             </div>
@@ -108,7 +108,7 @@ const classes=styles()
                 <input
                  className={classes.water}
                  onChange={handleChange}
-                 value={CValue.h20Frequency}
+                 value={CValue.h2oFrequency}
                  name="h20Frequency"
                  />
 
@@ -118,7 +118,7 @@ const classes=styles()
                 <button onClick={()=>{edit(false)}} className={classes.submit}>cancel</button>
 
             </form>
-            </div>
+            </div> 
         </div>
     )
 }

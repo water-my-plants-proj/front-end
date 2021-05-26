@@ -6,18 +6,11 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import schema from "../validation/AddPlantSchema";
 import styled from "styled-components";
-import axiosWithAuth from "../Utils/AxiosWithAuth"
-const initialPlantValues = {
-  "nickname": "",
-  "species": "",
-  "h2OFrequency": "",
-};
-const initialPlantErrors = {
-  nickname: "",
-  species: "",
-  h2OFrequency: "",
-};
-const initialDisabled = true;
+import axiosWithAuth from "../Utils/AxiosWithAuth";
+import {connect} from "react-redux";
+import {addPlant} from '../Actions/Index';
+import{useHistory} from 'react-router-dom'
+
 
 const StyledFormAddPlant = styled.div`
   display: flex;
@@ -52,7 +45,25 @@ const StyledFormAddPlant = styled.div`
   }
 `;
 
-export default function AddPlant() {
+function AddPlant(props) {
+  console.log(props)
+  const{addPlant,data}=props
+  const{push}= useHistory()
+
+
+  const initialPlantValues = {
+    "nickname": "",
+    "species": "",
+    "h2oFrequency": "",
+  };
+  const initialPlantErrors = {
+    nickname: "",
+    species: "",
+    h2oFrequency:"",
+    plant_id:data.length + 1,
+  };
+  const initialDisabled = true;
+
   const [plantValues, setPlantValues] = useState(initialPlantValues);
   const [disabled, setDisabled] = useState(initialDisabled);
   const [plantErrors, setPlantErrors] = useState(initialPlantErrors);
@@ -70,16 +81,18 @@ export default function AddPlant() {
     const newPlant = {
       nickname: plantValues.nickname.trim(),
       species: plantValues.species.trim(),
-      h2OFrequency: plantValues.h2OFrequency.trim(),}
+      h2oFrequency: plantValues.h2oFrequency.trim(),}
    
     //this information will need to be posted to the end point
 
   const onSubmit = (evt) => {
     evt.preventDefault();
+    addPlant(newPlant)
     axiosWithAuth().post("/plants/plants",newPlant)
     .then((res)=>{
       console.log(res)
     })
+    push("/plant-list")
   };
 
   const inputChange = (name, value) => {
@@ -125,9 +138,9 @@ export default function AddPlant() {
         <label>
           Watering Frequency:
           <input
-            id="h2OFrequencyInput"
+            id="h2oFrequencyInput"
             type="text"
-            name="h2OFrequency"
+            name="h2oFrequency"
             value={plantValues.password}
             onChange={onChange}
           />
@@ -138,9 +151,18 @@ export default function AddPlant() {
         <div className="errors">
           <h3>{plantErrors.nickname}</h3>
           <h3>{plantErrors.species}</h3>
-          <h3>{plantErrors.h2OFrequency}</h3>
+          <h3>{plantErrors.h2oFrequency}</h3>
         </div>
       </form>
     </StyledFormAddPlant>
   );
 }
+const mapStateToProps=(state)=>{
+  return{
+    data:state.plantList
+  }
+}
+const mapActionsToProps={
+addPlant
+}
+export default connect(mapStateToProps,mapActionsToProps)(AddPlant)

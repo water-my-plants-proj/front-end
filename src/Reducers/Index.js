@@ -1,14 +1,14 @@
-import { SIGN_UP, LOG_IN, FETCH_START, FETCH_SUCCESS, FETCH_FAIL } from '../Actions/Index'
+import { SIGN_UP, LOG_IN, FETCH_START, FETCH_SUCCESS, FETCH_FAIL,ADD_PLANT } from '../Actions/Index'
 const initialState = {
     plantList: [
-            {}
-        ],
+        {}
+    ],
     isFetching: false,
-    error: '', 
+    error: '',
 }
 
-export const Reducer = (state=initialState, action) => {
-    switch(action.type) {
+export const Reducer = (state = initialState, action) => {
+    switch (action.type) {
         case SIGN_UP:
             return ({
                 ...state,
@@ -28,13 +28,18 @@ export const Reducer = (state=initialState, action) => {
                 ...state,
                 plantList: action.payload,
                 isFetching: false,
-                error:''
+                error: ''
             })
         case FETCH_FAIL:
             return ({
                 ...state,
                 isFetching: false,
                 error: action.payload,
+            })
+        case ADD_PLANT:
+            return ({
+                ...state,
+                plantList:[...state.plantList,action.payload]
             })
         default:
             return state

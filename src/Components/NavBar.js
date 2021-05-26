@@ -46,6 +46,7 @@ const{loggedIn,setLoggedIn}=props
     push("/plant-list")
   }
   const handleLogout=()=> {
+    localStorage.removeItem("token")
     push("/")
     handleClose()
     setLoggedIn(false)

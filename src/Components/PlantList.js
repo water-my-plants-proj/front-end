@@ -5,7 +5,7 @@ import EditPlant from './EditPlant';
 import {connect} from 'react-redux'
 import {fetchPlants} from '../Actions/Index';
 import {useHistory} from 'react-router-dom';
-
+import axios from 'axios'
 const styles = makeStyles({
 plantPage:{
     display:"flex",
@@ -27,14 +27,14 @@ title:{
 
 })
 function PlantList(props) {
-    console.log(props)
+    const{data}=props
     const {push}=useHistory()
     const {fetchPlants}= props
     useEffect(() => {
         fetchPlants("/plants/plants")
     },[])
 
-    const [plantList, setPlantList ] = useState(props.data)
+    const [plantList, setPlantList ] = useState(data)
     const [ edit, setEdit ] = useState(false)
     const [ plantToEdit, setPlantToEdit ] = useState(null)
     const handleAdd=(e)=>{
@@ -44,7 +44,12 @@ function PlantList(props) {
 
     const returnPlantId = (id)=>{
         setEdit(true)
-        setPlantToEdit(plantList[id])
+      const EditClick =  plantList.filter((item)=>{
+          console.log(item)
+          console.log(item)
+            return item.plant_id==id
+        })
+        setPlantToEdit(...EditClick)
         return id
     }
 
@@ -61,7 +66,7 @@ const classes=styles()
         <div className={classes.PlantList}>
             
             {plantList.map((item)=>{
-                return(<h3><PlantCard key ={item.id} plant={item} edit={returnPlantId}/> </h3>)
+                return(<h3><PlantCard key ={item.id} plant={item} returnPlantId={returnPlantId}/> </h3>)
     })}
         </div>
         {edit===true?<EditPlant plantList={plantList} setPlantList={setPlantList} plantToEdit={plantToEdit} edit={setEdit}/>:<></>}
