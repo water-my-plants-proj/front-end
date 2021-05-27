@@ -4,20 +4,23 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
-	margin: 0 auto;
-	display: flex;
+  margin: 0 auto;
+  display: flex;
   flex-direction: column;
   align-items: center;
   border: 2px solid #52734d;
   background-color: #ddffbc;
-	font-family: 'Lato';
-	width: 30%;
-	margin-top: 15%;
-	padding-bottom: 1%;
+  font-family: "Lato";
+  width: 30%;
+  margin-top: 15%;
+  padding-bottom: 1%;
 
-	h1,h2,h3,h4{
-		font-family: 'Roboto';
-	}
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Roboto";
+  }
 
   .loginContainer {
     display: flex;
@@ -37,8 +40,8 @@ const StyledDiv = styled.div`
     color: green;
   }
   .buttonContainer {
-		display:flex;
-		justify-content: center;
+    display: flex;
+    justify-content: center;
     margin-top: 2%;
   }
   .errors {

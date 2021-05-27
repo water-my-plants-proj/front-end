@@ -44,7 +44,11 @@ const StyledFormAddPlant = styled.div`
   }
   button {
     width: 40%;
-    color: green;
+    color: #feffde;
+    background-color: #91c788;
+  }
+  input {
+    background-color: #feffde;
   }
   .buttonContainer {
     display: flex;

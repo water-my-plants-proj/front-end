@@ -28,6 +28,7 @@ const StyledEditUserPage = styled.div`
     border: 2px solid #52734d;
     font-size: 0.5rem;
     background-color: #ddffbc;
+    padding: 2%;
   }
 
   form {
@@ -36,6 +37,7 @@ const StyledEditUserPage = styled.div`
     align-items: center;
     border: 2px solid #52734d;
     background-color: #ddffbc;
+    /* margin: 0 auto; */
 
     input {
       background-color: #feffde;
