@@ -38,7 +38,7 @@ const StyledDiv = styled.div`
   }
   .buttonContainer {
 		display:flex;
-		justify-content: center
+		justify-content: center;
     margin-top: 2%;
   }
   .errors {
