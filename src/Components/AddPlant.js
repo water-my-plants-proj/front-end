@@ -8,9 +8,23 @@ import { addPlant } from '../Actions/Index';
 import { useHistory } from 'react-router-dom';
 
 const StyledFormAddPlant = styled.div`
+  margin: 0 auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  border: 2px solid green;
+  align-items: center;
+  border: 2px solid #52734d;
+  background-color: #ddffbc;
+  font-family: "Lato";
+  width: 30%;
+  margin-top: 15%;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Roboto";
+  }
   .newPlantContainer {
     display: flex;
     flex-direction: column;
@@ -26,7 +40,11 @@ const StyledFormAddPlant = styled.div`
   }
   button {
     width: 40%;
-    color: green;
+    color: #feffde;
+    background-color: #91c788;
+  }
+  input {
+    background-color: #feffde;
   }
   .buttonContainer {
     display: flex;
@@ -77,8 +95,6 @@ function AddPlant(props) {
     h2oFrequency: plantValues.h2oFrequency.trim(),
   }
    
-    //this information will need to be posted to the end point
-
   const onSubmit = (evt) => {
     evt.preventDefault();
     console.log("NEW PLANT", newPlant)
@@ -157,12 +173,12 @@ function AddPlant(props) {
     </StyledFormAddPlant>
   );
 }
-const mapStateToProps=(state)=>{
-  return{
-    data:state.plantList
-  }
-}
-const mapActionsToProps={
-addPlant
-}
-export default connect(mapStateToProps,mapActionsToProps)(AddPlant)
+const mapStateToProps = (state) => {
+  return {
+    data: state.plantList,
+  };
+};
+const mapActionsToProps = {
+  addPlant,
+};
+export default connect(mapStateToProps, mapActionsToProps)(AddPlant);
