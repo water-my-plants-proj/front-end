@@ -3,7 +3,6 @@ import * as yup from "yup";
 import schema from "../validation/LoginSchema";
 import styled from "styled-components";
 import {useHistory} from "react-router-dom"
-import axiosWithAuth from "../Utils/AxiosWithAuth"
 import axios from "axios";
 
 
@@ -73,11 +72,6 @@ const test={
         setFormErrors({ ...formErrors, [name]: "-" + err.errors[0] })
       );
   };
-  const newLogin = {
-    username: loginValues.username.trim(),
-    password: loginValues.password.trim(),
-  };
-
   const onSubmit = (evt) => {
     evt.preventDefault();
     

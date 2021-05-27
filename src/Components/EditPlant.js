@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
 import { makeStyles } from '@material-ui/styles';
-import { useHistory } from 'react-router-dom';
 import {connect} from 'react-redux'
 import axiosWithAuth from '../Utils/AxiosWithAuth';
 import {deletePlant} from '../Actions/Index';

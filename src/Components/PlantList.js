@@ -5,7 +5,6 @@ import EditPlant from './EditPlant';
 import {connect} from 'react-redux'
 import {fetchPlants} from '../Actions/Index';
 import {useHistory} from 'react-router-dom';
-import axios from 'axios'
 const styles = makeStyles({
 plantPage:{
     display:"flex",
@@ -33,10 +32,10 @@ button:{
 function PlantList(props) {
     const{data}=props
     const {push}=useHistory()
-    const {fetchPlants,fetching}= props
+    const {fetchPlants}= props
     useEffect(() => {
         fetchPlants("/plants/plants")
-    },[])
+    },[fetchPlants])
     const [ edit, setEdit ] = useState(false)
     const [ plantToEdit, setPlantToEdit ] = useState(null)
     const handleAdd=(e)=>{
@@ -49,7 +48,7 @@ function PlantList(props) {
       const EditClick =  data.filter((item)=>{
           console.log(item)
           console.log(item)
-            return item.plant_id==id
+            return item.plant_id===id
         })
         setPlantToEdit(...EditClick)
         return id

@@ -66,7 +66,6 @@ const initialFormErrors = {
 const initialDisabled = true;
 
 export default function EditUser(props) {
-  const { user } = props;
 
   const [formValues, setFormValues] = useState(initialFormValues);
   const [disabled, setDisabled] = useState(initialDisabled);
