@@ -7,26 +7,28 @@ import * as yup from "yup";
 import schema from "../validation/AddPlantSchema";
 import styled from "styled-components";
 import axiosWithAuth from "../Utils/AxiosWithAuth";
-import {connect} from "react-redux";
-import {addPlant} from '../Actions/Index';
-import{useHistory} from 'react-router-dom'
-
+import { connect } from "react-redux";
+import { addPlant } from "../Actions/Index";
+import { useHistory } from "react-router-dom";
 
 const StyledFormAddPlant = styled.div`
-	margin: 0 auto;	
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-	justify-content:center;
+  justify-content: center;
   align-items: center;
   border: 2px solid #52734d;
   background-color: #ddffbc;
-	font-family: 'Lato';
-	width: 30%;
-	margin-top: 15%;
-	
-	h1,h2,h3,h4 {
-		font-family: 'Roboto';
-	}
+  font-family: "Lato";
+  width: 30%;
+  margin-top: 15%;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Roboto";
+  }
   .newPlantContainer {
     display: flex;
     flex-direction: column;
@@ -57,21 +59,20 @@ const StyledFormAddPlant = styled.div`
 `;
 
 function AddPlant(props) {
-  console.log(props)
-  const{addPlant,data}=props
-  const{push}= useHistory()
-
+  console.log(props);
+  const { addPlant, data } = props;
+  const { push } = useHistory();
 
   const initialPlantValues = {
-    "nickname": "",
-    "species": "",
-    "h2oFrequency": "",
+    nickname: "",
+    species: "",
+    h2oFrequency: "",
   };
   const initialPlantErrors = {
     nickname: "",
     species: "",
-    h2oFrequency:"",
-    plant_id:data.length + 1,
+    h2oFrequency: "",
+    plant_id: data.length + 1,
   };
   const initialDisabled = true;
 
@@ -89,21 +90,23 @@ function AddPlant(props) {
       );
   };
 
-    const newPlant = {
-      nickname: plantValues.nickname.trim(),
-      species: plantValues.species.trim(),
-      h2oFrequency: plantValues.h2oFrequency.trim(),}
-   
-    //this information will need to be posted to the end point
+  const newPlant = {
+    nickname: plantValues.nickname.trim(),
+    species: plantValues.species.trim(),
+    h2oFrequency: plantValues.h2oFrequency.trim(),
+  };
+
+  //this information will need to be posted to the end point
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    addPlant(newPlant)
-    axiosWithAuth().post("/plants/plants",newPlant)
-    .then((res)=>{
-      console.log(res)
-    })
-    push("/plant-list")
+    addPlant(newPlant);
+    axiosWithAuth()
+      .post("/plants/plants", newPlant)
+      .then((res) => {
+        console.log(res);
+      });
+    push("/plant-list");
   };
 
   const inputChange = (name, value) => {
@@ -168,12 +171,12 @@ function AddPlant(props) {
     </StyledFormAddPlant>
   );
 }
-const mapStateToProps=(state)=>{
-  return{
-    data:state.plantList
-  }
-}
-const mapActionsToProps={
-addPlant
-}
-export default connect(mapStateToProps,mapActionsToProps)(AddPlant)
+const mapStateToProps = (state) => {
+  return {
+    data: state.plantList,
+  };
+};
+const mapActionsToProps = {
+  addPlant,
+};
+export default connect(mapStateToProps, mapActionsToProps)(AddPlant);
