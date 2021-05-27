@@ -5,6 +5,7 @@ import EditPlant from './EditPlant';
 import {connect} from 'react-redux'
 import {fetchPlants} from '../Actions/Index';
 import {useHistory} from 'react-router-dom';
+
 const styles = makeStyles({
 plantPage:{
     display:"flex",
@@ -26,18 +27,18 @@ title:{
 button:{
     border:"10px solid black"
 },
-
-
 })
+
 function PlantList(props) {
-    const{data}=props
-    const {push}=useHistory()
-    const {fetchPlants}= props
-    useEffect(() => {
-        fetchPlants("/plants/plants")
-    },[fetchPlants])
+    const { data, fetchPlants } = props
     const [ edit, setEdit ] = useState(false)
     const [ plantToEdit, setPlantToEdit ] = useState(null)
+    const {push}=useHistory()
+
+    useEffect(() => {
+        fetchPlants("/plants/plants")
+    }, [])
+    
     const handleAdd=(e)=>{
         e.preventDefault()
         push("/add-plant")
