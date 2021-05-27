@@ -66,21 +66,30 @@ const styles= makeStyles({
 
     const handleDelete=(e)=>{
         e.preventDefault()
-        deletePlant(plantToEdit.plant_id)
-        edit(false)
+        axiosWithAuth()
+            .delete(`/plants/plants/${plantToEdit.plant_id}`)
+            .then(res => {
+                // console.log("DELETE RESPONSE", res)
+                deletePlant(plantToEdit.plant_id)
+            })
+            .catch(err => {
+                console.log("DELETE ERROR", err)
+            })
 
+        edit(false)
     }
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        edit(false);
-        editPlant(CValue)
         console.log(CValue)
         axiosWithAuth().put(`/plants/plants/${plantToEdit.plant_id}`)
-        .then(res=>{
-            console.log(res)
+        .then(res => {
+            editPlant(CValue)
+            edit(false);
         })
-        .catch(err=>console.log(err))
+        .catch(err => {
+            console.log(err)
+        })
     }
     const handleChange=(e)=>{
         e.preventDefault()

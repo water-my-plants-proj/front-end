@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import axios from 'axios';
+import React,{useState} from 'react'
+import {useHistory} from 'react-router-dom'
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
@@ -30,6 +30,39 @@ const StyledDiv = styled.div`
     display: flex;
     justify-content: space-between;
   }
+
+const initialValue={
+    username: "unique",
+    password: "Password",
+    phoneNumber:"111-111-1111"
+}
+
+export default function SignUp() {
+	const {push}=useHistory()
+	const [signUpValues, setSignUp] = useState(initialValue);
+	const [ fail, setFail ] = useState(false)
+	const [ errMessage, setErrMessage ] = useState('');
+
+	const onSubmit = e => {
+		 e.preventDefault()
+    	 axios.post("https://plantszapi.herokuapp.com/api/auth/register",signUpValues)
+        .then((res) => {
+            console.log(res)
+			push("/plant-list")
+			setFail(false)
+        })
+        .catch((err) => {
+			console.log(Object.keys(err.response.data.message))
+			const errMessage = err.response.data.message;
+			console.log(errMessage)
+			if (errMessage.search('users_username_unique')) {
+				setErrMessage('user name already exists')
+			} else {
+				setErrMessage('phone number is already linked to an account')
+			}
+			setFail(true)
+         })
+	}
 
   h2 {
     margin: 0 auto;
