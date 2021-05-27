@@ -1,6 +1,53 @@
 import axios from 'axios';
 import React,{useState} from 'react'
 import {useHistory} from 'react-router-dom'
+import styled from 'styled-components'
+
+const StyledDiv = styled.div`
+	margin: 0 auto;
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #52734d;
+  background-color: #ddffbc;
+	font-family: 'Lato';
+	width: 30%;
+	margin-top: 15%;
+	padding-bottom: 1%;
+
+	h1,h2,h3,h4{
+		font-family: 'Roboto';
+	}
+
+  .loginContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h2 {
+    margin: 0 auto;
+    margin-bottom: 2%;
+  }
+  button {
+    width: 40%;
+    color: green;
+  }
+  .buttonContainer {
+		display:flex;
+		justify-content: center;
+    margin-top: 2%;
+  }
+  .errors {
+    display: flex;
+    color: red;
+    font-size: 0.5rem;
+  }
+`
+
 const initialValue={
     username: "Test",
     password: "Password",
@@ -31,7 +78,7 @@ export default function SignUp() {
 	}
 	return (
 
-		<div>
+		<StyledDiv>
 			<form className='loginContainer' onSubmit={onSubmit}>
 				<h2>Sign Up</h2>
 				<label>Username:
@@ -55,8 +102,10 @@ export default function SignUp() {
 						value={signUpValues.password}
 						onChange={onChange} />
 				</label>
-				<button>Sign Up</button>
+				<div className='buttonContainer'>
+					<button>Sign Up</button>
+				</div>
 			</form>
-		</div>
+		</StyledDiv>
 	)
 }
