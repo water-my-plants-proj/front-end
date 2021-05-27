@@ -3,7 +3,7 @@ import * as yup from "yup";
 import schema from "../validation/LoginSchema";
 import styled from "styled-components";
 import {useHistory} from "react-router-dom"
-import axios from "axios"
+import axios from "axios";
 
 
 const initialLoginValues={
@@ -72,20 +72,18 @@ const test={
         setFormErrors({ ...formErrors, [name]: "-" + err.errors[0] })
       );
   };
-  const newLogin = {
-    username: loginValues.username.trim(),
-    password: loginValues.password.trim(),
-  };
-
   const onSubmit = (evt) => {
     evt.preventDefault();
-    push("/plant-list")
+    
     props.setLoggedIn(true);
     axios.post("https://plantszapi.herokuapp.com/api/auth/login",test)
     .then((res)=>{
-      localStorage.setItem(res.data.token)
+      console.log(res)
+    localStorage.setItem("token",res.data.token)
+    push("/plant-list")
     })
     .catch((err)=>{
+      console.log(err)
     })
   };
 

@@ -5,6 +5,8 @@ export const LOG_IN = "LOG_IN";
 export const FETCH_START = "FETCH_START";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAIL = "FETCH_FAIL";
+export const DELETE_PLANT="DELETE_PLANT";
+export const EDIT_PLANT="EDIT_PLANT"
 export const fetchPlants= (url) => {
     return(dispatch => {
         dispatch(fetchStart());
@@ -39,4 +41,10 @@ export const fetchFail = (err) => {
 } 
 export const addPlant = (newPlant) => {
     return({type: ADD_PLANT, payload: newPlant})
+}
+export const deletePlant = (id) => {
+    return({type: DELETE_PLANT, payload:id})
+}
+export const editPlant = (edited) => {
+    return({type: EDIT_PLANT, payload:edited})
 }

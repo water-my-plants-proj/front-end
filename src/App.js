@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import Home from './Components/Home';
 //Routes
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import PrivateRoute from './Components/PrivateRoute';
 //Components
 import AddPlant from './Components/AddPlant'
 import EditUser from './Components/EditUser';
@@ -13,10 +12,8 @@ import PlantList from './Components/PlantList';
 import SignUp from './Components/SignUp';
 import { connect } from 'react-redux';
 
-function App(props) {
-  const{data}=props
+function App() {
   const[loggedIn,setLoggedIn] =useState(false)
-  const[plants,setPlants] =useState(data)
   return (
     <Router>
       <NavBar setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
@@ -46,9 +43,5 @@ function App(props) {
     </Router>
   );
 }
-const mapStateToProps=(state)=>{
-  return{
-    data:state.plantList
-  }
-}
-export default connect(mapStateToProps,null)(App)
+
+export default connect(null)(App)

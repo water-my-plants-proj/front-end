@@ -1,7 +1,6 @@
-import { SIGN_UP, LOG_IN, FETCH_START, FETCH_SUCCESS, FETCH_FAIL,ADD_PLANT } from '../Actions/Index'
+import { SIGN_UP, LOG_IN, FETCH_START, FETCH_SUCCESS, FETCH_FAIL,ADD_PLANT,DELETE_PLANT,EDIT_PLANT } from '../Actions/Index'
 const initialState = {
     plantList: [
-        {}
     ],
     isFetching: false,
     error: '',
@@ -41,6 +40,18 @@ export const Reducer = (state = initialState, action) => {
                 ...state,
                 plantList:[...state.plantList,action.payload]
             })
+            case DELETE_PLANT:
+                console.log(action.payload)
+                return ({
+                    ...state,
+                    plantList:state.plantList.filter((item)=>{ return action.payload!==item.plant_id})
+                })
+                case EDIT_PLANT:
+                    return ({
+                        ...state,
+                         plantList:[ action.payload,...state.plantList.filter((item)=>{ return action.payload.plant_id!==item.plant_id})]
+                        
+                    })
         default:
             return state
     }

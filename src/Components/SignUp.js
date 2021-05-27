@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React,{useState} from 'react'
-import axiosWithAuth from '../Utils/AxiosWithAuth';
 import {useHistory} from 'react-router-dom'
 const initialValue={
     username: "Test",

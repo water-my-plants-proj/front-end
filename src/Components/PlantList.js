@@ -5,7 +5,6 @@ import EditPlant from './EditPlant';
 import {connect} from 'react-redux'
 import {fetchPlants} from '../Actions/Index';
 import {useHistory} from 'react-router-dom';
-import axios from 'axios'
 const styles = makeStyles({
 plantPage:{
     display:"flex",
@@ -15,15 +14,19 @@ PlantList:{
     width:"100%",
     backgroundColor:"grey"
 },
-header:{
-    textAlign:"center",
-},
 title:{
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"center",
     marginTop:"-4%",
     background:"green",
     paddingTop:"3%",
     paddingBottom:"3%"
-}
+},
+button:{
+    border:"10px solid black"
+},
+
 
 })
 function PlantList(props) {
@@ -32,9 +35,7 @@ function PlantList(props) {
     const {fetchPlants}= props
     useEffect(() => {
         fetchPlants("/plants/plants")
-    },[])
-
-    const [plantList, setPlantList ] = useState(data)
+    },[fetchPlants])
     const [ edit, setEdit ] = useState(false)
     const [ plantToEdit, setPlantToEdit ] = useState(null)
     const handleAdd=(e)=>{
@@ -44,10 +45,10 @@ function PlantList(props) {
 
     const returnPlantId = (id)=>{
         setEdit(true)
-      const EditClick =  plantList.filter((item)=>{
+      const EditClick =  data.filter((item)=>{
           console.log(item)
           console.log(item)
-            return item.plant_id==id
+            return item.plant_id===id
         })
         setPlantToEdit(...EditClick)
         return id
@@ -58,18 +59,19 @@ const classes=styles()
     return (
         <div>
         <div className={classes.title}>
+
         <h3 className={classes.header}>Welcome to your Plant List</h3>
-        <button onClick={handleAdd}>Add Plant</button>
+        <button className={classes.button} onClick={handleAdd}>Add Plant</button>
         </div>
         <div className={classes.plantPage}>
        
         <div className={classes.PlantList}>
             
-            {plantList.map((item)=>{
+            {data.map((item)=>{
                 return(<h3><PlantCard key ={item.id} plant={item} returnPlantId={returnPlantId}/> </h3>)
     })}
         </div>
-        {edit===true?<EditPlant plantList={plantList} setPlantList={setPlantList} plantToEdit={plantToEdit} edit={setEdit}/>:<></>}
+        {edit===true?<EditPlant plantList={data} plantToEdit={plantToEdit} edit={setEdit}/>:<></>}
         </div>
         </div>
         
@@ -78,7 +80,8 @@ const classes=styles()
 
 const mapStateToProps=(state)=>{
 return{
-    data:state.plantList
+    data:state.plantList,
+    fetching:state.isFetching
 }
 }
 const mapActionsToProps={

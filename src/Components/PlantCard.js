@@ -53,7 +53,6 @@ export default function PlantCard(props) {
             <button onClick={handleClick} className={classes.edit}>Edit</button>
             </div>
             <div className={classes.imgCont}>
-             <img className={classes.img} src={plant.image}></img>
             </div>
         </div>
     )

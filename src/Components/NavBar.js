@@ -59,7 +59,7 @@ const{loggedIn,setLoggedIn}=props
   }
   const handleAccount=()=> {
     handleClose()
-    push("/EditUser")
+    push("/edit-user")
   }
 
   const standard = useStyles()
@@ -80,7 +80,7 @@ const{loggedIn,setLoggedIn}=props
       
           <MenuItem onClick={handlePlants}>Plants</MenuItem>
 
-          {loggedIn==true ?<MenuItem onClick={handleLogout}>LoginOut</MenuItem>:<MenuItem onClick={handleLogin}>LoginIn</MenuItem>}
+          {loggedIn===true ?<MenuItem onClick={handleLogout}>LoginOut</MenuItem>:<MenuItem onClick={handleLogin}>LoginIn</MenuItem>}
 
           <MenuItem onClick={handleAccount}>Account</MenuItem>
       </Menu>
