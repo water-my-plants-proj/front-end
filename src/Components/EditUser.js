@@ -10,12 +10,15 @@ const StyledEditUserPage = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
-	font-family: 'Lato';
-	padding: 10%;
+  font-family: "Lato";
+  padding: 10%;
 
-	h1,h2,h3,h4{
-		font-family: 'Roboto';
-	}
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Roboto";
+  }
 
   .userCard {
     display: flex;
@@ -72,7 +75,6 @@ const initialFormErrors = {
 const initialDisabled = true;
 
 export default function EditUser(props) {
-
   const [formValues, setFormValues] = useState(initialFormValues);
   const [disabled, setDisabled] = useState(initialDisabled);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
@@ -150,4 +152,3 @@ export default function EditUser(props) {
     </StyledEditUserPage>
   );
 }
-
