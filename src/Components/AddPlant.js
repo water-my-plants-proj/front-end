@@ -1,16 +1,11 @@
-//this component will be interacting with plant list state?
-//submission may need to observe this, and post
-//testing spacing
-
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import schema from "../validation/AddPlantSchema";
 import styled from "styled-components";
 import axiosWithAuth from "../Utils/AxiosWithAuth";
-import {connect} from "react-redux";
-import {addPlant} from '../Actions/Index';
-import{useHistory} from 'react-router-dom'
-
+import { connect } from "react-redux";
+import { addPlant } from '../Actions/Index';
+import { useHistory } from 'react-router-dom';
 
 const StyledFormAddPlant = styled.div`
   display: flex;
@@ -45,28 +40,26 @@ const StyledFormAddPlant = styled.div`
   }
 `;
 
+const initialPlantValues = {
+  nickname: "",
+  species: "",
+  h2oFrequency: "",
+};
+const initialPlantErrors = {
+  nickname: "",
+  species: "",
+  h2oFrequency:"",
+};
+const initialDisabled = true;
+
 function AddPlant(props) {
-  console.log(props)
-  const{addPlant,data}=props
-  const{push}= useHistory()
-
-
-  const initialPlantValues = {
-    "nickname": "",
-    "species": "",
-    "h2oFrequency": "",
-  };
-  const initialPlantErrors = {
-    nickname: "",
-    species: "",
-    h2oFrequency:"",
-    plant_id:data.length + 1,
-  };
-  const initialDisabled = true;
-
+  console.log("ADD PLANT PROPS", props)
   const [plantValues, setPlantValues] = useState(initialPlantValues);
   const [disabled, setDisabled] = useState(initialDisabled);
   const [plantErrors, setPlantErrors] = useState(initialPlantErrors);
+  
+  const { push } = useHistory()
+  const { addPlant } = props
 
   const validate = (name, value) => {
     yup
@@ -78,21 +71,28 @@ function AddPlant(props) {
       );
   };
 
-    const newPlant = {
-      nickname: plantValues.nickname.trim(),
-      species: plantValues.species.trim(),
-      h2oFrequency: plantValues.h2oFrequency.trim(),}
+  const newPlant = {
+    nickname: plantValues.nickname.trim(),
+    species: plantValues.species.trim(),
+    h2oFrequency: plantValues.h2oFrequency.trim(),
+  }
    
     //this information will need to be posted to the end point
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    addPlant(newPlant)
-    axiosWithAuth().post("/plants/plants",newPlant)
-    .then((res)=>{
-      console.log(res)
+    console.log("NEW PLANT", newPlant)
+    axiosWithAuth()
+    .post("/plants/plants", newPlant)
+    .then(res => {
+      console.log("ADD PLANT RESPONSE", res)
+      addPlant(newPlant)
+      push("/plant-list")
     })
-    push("/plant-list")
+    .catch(err => {
+      debugger
+      console.log(err)
+    })
   };
 
   const inputChange = (name, value) => {
