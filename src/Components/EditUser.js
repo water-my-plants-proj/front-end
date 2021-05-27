@@ -10,6 +10,12 @@ const StyledEditUserPage = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
+	font-family: 'Lato';
+	padding: 10%;
+
+	h1,h2,h3,h4{
+		font-family: 'Roboto';
+	}
 
   .userCard {
     display: flex;

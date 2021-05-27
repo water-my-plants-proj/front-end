@@ -13,9 +13,20 @@ import{useHistory} from 'react-router-dom'
 
 
 const StyledFormAddPlant = styled.div`
+	margin: 0 auto;	
   display: flex;
-  justify-content: center;
-  border: 2px solid green;
+  flex-direction: column;
+	justify-content:center;
+  align-items: center;
+  border: 2px solid #52734d;
+  background-color: #ddffbc;
+	font-family: 'Lato';
+	width: 30%;
+	margin-top: 15%;
+	
+	h1,h2,h3,h4 {
+		font-family: 'Roboto';
+	}
   .newPlantContainer {
     display: flex;
     flex-direction: column;

@@ -20,9 +20,21 @@ const initialLoginErrors = {
 const initialDisabled = true;
 
 const StyledFormLogin = styled.div`
-  display: flex;
-  justify-content: center;
-  border: 2px solid green;
+	margin: 0 auto;
+	display: flex;
+  flex-direction: column;
+	justify-content:center;
+  align-items: center;
+  border: 2px solid #52734d;
+  background-color: #ddffbc;
+	font-family: 'Lato';
+	width: 30%;
+	margin-top: 15%;
+
+	h1,h2,h3,h4{
+		font-family: 'Roboto';
+	}
+
   .loginContainer {
     display: flex;
     flex-direction: column;
