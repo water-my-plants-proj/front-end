@@ -27,7 +27,7 @@ const StyledFormLogin = styled.div`
   background-color: #ddffbc;
   font-family: "Lato";
   width: 30%;
-  margin-top: 15%;
+
 
   h1,
   h2,
