@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { connect } from 'react-redux';
+import { logIn } from '../Actions/Index';
 import * as yup from "yup";
 import schema from "../validation/LoginSchema";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-
-
 
 const Form = styled.form`
   position: relative;
@@ -65,8 +65,8 @@ const Form = styled.form`
 `
 
 const initialLoginValues = {
-  username: "test",
-  password: "1234",
+  username: "",
+  password: "",
 };
 const initialLoginErrors = {
   username: "",
@@ -76,11 +76,7 @@ const initialLoginErrors = {
 
 const initialDisabled = true;
 
-export default function Login(props) {
-  const test = {
-    username: "test",
-    password: "1234",
-  };
+export function Login(props) {
   const { push } = useHistory();
   //removed props, dont know what will be passed in
   const [loginValues, setLoginValues] = useState(initialLoginValues);
@@ -98,14 +94,21 @@ export default function Login(props) {
   };
   const onSubmit = (evt) => {
     evt.preventDefault();
-
     props.setLoggedIn(true);
     axios
-      .post("https://plantszapi.herokuapp.com/api/auth/login", test)
+      .post("https://plantszapi.herokuapp.com/api/auth/login", loginValues)
       .then((res) => {
-        console.log(res);
+        const resData = JSON.parse(res.config.data)
+        const UserData = {
+          username: resData.username,
+          password: resData.password,
+          user_id: res.data.user_id
+        }
+        console.log("USER DATA", UserData)
         localStorage.setItem("token", res.data.token);
+        props.logIn(UserData);
         push("/plant-list");
+        setLoginValues(initialLoginValues)
       })
       .catch((err) => {
         console.log(err);
@@ -162,3 +165,8 @@ export default function Login(props) {
     </Form>
   );
 }
+const mapActionsToProps={
+  logIn,
+  }
+
+export default connect(null, mapActionsToProps)(Login);
