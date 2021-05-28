@@ -38,6 +38,8 @@ const Form = styled.form`
   border-bottom: 3px solid #f3f2da;
   }
 
+  
+
   button {
     background: #f3f2da;
     margin: 0 10px;

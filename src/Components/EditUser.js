@@ -6,65 +6,63 @@ import styled from "styled-components";
 import schema from "../validation/EditUserSchema";
 import * as yup from "yup";
 
-const StyledEditUserPage = styled.div`
-  display: flex;
-  justify-content: center;
+const Form = styled.form`
+  position: relative;
+  top: 150px;
+  height: 40vh;
+  width: 30%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: #f3f2da;
+  border: 1px solid #f3f2da; 
+  box-shadow: 0px 0px 60px #ea97ad;
+  background-color: black;
   font-family: "Lato";
-  padding: 10%;
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-family: "Roboto";
+  label {
+    display: flex;
+    justify-content: space-between;
+    width: 
   }
 
-  .userCard {
+  h2 {
+  font-family: "Roboto";
+  margin: 25px auto;
+  margin-top: 5%;
+  font-size: 2rem;
+  text-align: center;
+  border-bottom: 3px solid #f3f2da;
+  }
+
+  button {
+    background: #f3f2da;
+    margin: 0 10px;
+    border-radius: 10px;
+    padding: 2px 25px;
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 40px;
+
+    &:hover {
+      background: black;
+      color: #f3f2da;
+      border: 2px solid #f3f2da;
+  }
+  &:active {
+      transform: scale(.9);
+      box-shadow: inset 2px 2px 5px white;
+  }
+  }
+ 
+  .errors {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #52734d;
+    color: red;
     font-size: 0.5rem;
-    background-color: #ddffbc;
-    padding: 2%;
   }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #52734d;
-    background-color: #ddffbc;
-    /* margin: 0 auto; */
-
-    input {
-      background-color: #feffde;
-    }
-
-    h2 {
-      margin: 0 auto;
-      margin-bottom: 2%;
-    }
-    button {
-      width: 40%;
-      color: #feffde;
-      background-color: #91c788;
-    }
-    .buttonContainer {
-      display: flex;
-      justify-content: center;
-      margin-top: 2%;
-    }
-    .errors {
-      display: flex;
-      color: red;
-      font-size: 0.5rem;
-      margin-left: 30%;
-    }
-  }
-`;
+`
 
 const initialFormValues = {
   username: "",
@@ -122,35 +120,27 @@ export default function EditUser(props) {
   }, [formValues]);
 
   return (
-    <StyledEditUserPage>
-      <div className="userCard">
-        <h2>Username: test</h2>
-        <h2>Password: test</h2>
-      </div>
-      <div className="formCard">
-        <form onSubmit={onSubmit}>
-          <h2>Edit User</h2>
-          <label>
-            Username:
-            <input
-              name="username"
-              value={formValues.username}
-              onChange={onChange}
-            />
-            <h2 className="errors">{formErrors.username}</h2>
-          </label>
-          <label>
-            Password:
-            <input
-              name="password"
-              value={formValues.password}
-              onChange={onChange}
-            />
-            <h2 className="errors">{formErrors.password}</h2>
-          </label>
-          <button disabled={disabled}>Submit</button>
-        </form>
-      </div>
-    </StyledEditUserPage>
+      <Form onSubmit={onSubmit}>
+        <h2>Edit User</h2>
+        <label>
+          Username:
+          <input
+            name="username"
+            value={formValues.username}
+            onChange={onChange}
+          />
+        </label>
+          <h2 className="errors">{formErrors.username}</h2>
+        <label>
+          Password:
+          <input
+            name="password"
+            value={formValues.password}
+            onChange={onChange}
+          />
+        </label>
+          <h2 className="errors">{formErrors.password}</h2>
+        <button disabled={disabled}>Submit</button>
+      </Form>
   );
 }
