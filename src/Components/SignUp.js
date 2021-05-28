@@ -99,11 +99,11 @@ export default function SignUp() {
       .post("https://plantszapi.herokuapp.com/api/auth/register", signUpValues)
       .then((res) => {
         console.log(res);
+        push("/login");
       })
       .catch((err) => {
         console.log(err);
       });
-    push("/plant-list");
   };
 
   const onChange = (e) => {
