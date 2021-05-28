@@ -80,7 +80,7 @@ const{loggedIn,setLoggedIn}=props
       
           <MenuItem onClick={handlePlants}>Plants</MenuItem>
 
-          {loggedIn===true ?<MenuItem onClick={handleLogout}>LoginOut</MenuItem>:<MenuItem onClick={handleLogin}>LoginIn</MenuItem>}
+          {loggedIn===true ?<MenuItem onClick={handleLogout}>Logout</MenuItem>:<MenuItem onClick={handleLogin}>Login</MenuItem>}
 
           <MenuItem onClick={handleAccount}>Account</MenuItem>
       </Menu>

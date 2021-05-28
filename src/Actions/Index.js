@@ -46,6 +46,6 @@ export const addPlant = (newPlant) => {
 export const deletePlant = (id) => {
     return({type: DELETE_PLANT, payload:id})
 }
-export const editPlant = (edited) => {
-    return({type: EDIT_PLANT, payload:edited})
+export const editPlant = (plantObj) => {
+    return({type: EDIT_PLANT, payload: plantObj})
 }

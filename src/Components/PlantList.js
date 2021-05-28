@@ -56,24 +56,21 @@ function PlantList(props) {
     }
 
 const classes=styles()
-
+ 
     return (
         <div>
-        <div className={classes.title}>
-
-        <h3 className={classes.header}>Welcome to your Plant List</h3>
-        <button className={classes.button} onClick={handleAdd}>Add Plant</button>
-        </div>
-        <div className={classes.plantPage}>
-       
-        <div className={classes.PlantList}>
-            
-            {data.map((item)=>{
-                return(<h3><PlantCard key ={item.id} plant={item} returnPlantId={returnPlantId}/> </h3>)
-    })}
-        </div>
-        {edit===true?<EditPlant plantList={data} plantToEdit={plantToEdit} edit={setEdit}/>:<></>}
-        </div>
+            <div className={classes.title}>
+                <h3 className={classes.header}>Welcome to your Plant List</h3>
+                <button className={classes.button} onClick={handleAdd}>Add Plant</button>
+            </div>
+            <div className={classes.plantPage}>    
+                <div className={classes.PlantList}>         
+                    {data.map(item => {
+                        return(<h3><PlantCard key ={item.id} plant={item} returnPlantId={returnPlantId}/> </h3>)
+                    })}
+                </div>
+                {edit===true?<EditPlant plantList={data} plantToEdit={plantToEdit} edit={setEdit}/>:<></>}
+            </div>
         </div>
         
     )
@@ -82,7 +79,7 @@ const classes=styles()
 const mapStateToProps=(state)=>{
 return{
     data:state.plantList,
-    fetching:state.isFetching
+    fetching:state.isFetching,
 }
 }
 const mapActionsToProps={

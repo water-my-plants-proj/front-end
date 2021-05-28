@@ -5,7 +5,6 @@ import axiosWithAuth from '../Utils/AxiosWithAuth';
 import {deletePlant} from '../Actions/Index';
 import{editPlant} from '../Actions/Index'
 
-
 const styles= makeStyles({
     container:{
         width: "50%",
@@ -57,47 +56,42 @@ const styles= makeStyles({
     },
 })
 
-
-    function EditPlant(props) {
-
-    const {edit,plantToEdit,editPlant,deletePlant}= props
-
-    const [CValue,setCValue]=useState(plantToEdit)
-
+function EditPlant(props) {
+    const { edit, plantToEdit, editPlant, deletePlant } = props
+    const [ CValue, setCValue ] = useState(plantToEdit)
+    // console.log("-------------CVALUE----------", CValue)
+    // console.log("-------------PROPS--------------", props)
     const handleDelete=(e)=>{
         e.preventDefault()
         axiosWithAuth()
-            .delete(`/plants/plants/${plantToEdit.plant_id}`)
-            .then(res => {
-                // console.log("DELETE RESPONSE", res)
-                deletePlant(plantToEdit.plant_id)
-            })
-            .catch(err => {
-                console.log("DELETE ERROR", err)
-            })
-
+        .delete(`/plants/plants/${plantToEdit.plant_id}`)
+        .then(res => {
+            deletePlant(plantToEdit.plant_id)
+        })
+        .catch(err => {
+            console.log("DELETE ERROR", err)
+        })
         edit(false)
     }
-
-    const handleSubmit=(e)=>{
+    
+    const handleSubmit = e => {
+        console.log("PLANT_TO_EDIT_ID", plantToEdit.plant_id)
         e.preventDefault();
-        console.log(CValue)
-        axiosWithAuth().put(`/plants/plants/${plantToEdit.plant_id}`)
+        axiosWithAuth().put(`/plants/plants/${plantToEdit.plant_id}`, CValue)
         .then(res => {
             editPlant(CValue)
             edit(false);
         })
         .catch(err => {
-            console.log(err)
+            console.log("ERROR", Object.keys(err))
         })
     }
-    const handleChange=(e)=>{
+    const handleChange = e => {
         e.preventDefault()
-        const{name,value}=e.target
-        console.log(CValue)
+        const { name, value } = e.target
         setCValue({
-      ...CValue,
-      [name]:value,   
+            ...CValue,
+            [name]:value,   
     })}
 
 
@@ -110,52 +104,47 @@ const classes=styles()
             </div>
             <form onSubmit={handleSubmit} className={classes.form}>
                 <label
-                 className={classes.label}
-                 > Species:
-
+                    className={classes.label}
+                >Species:
                 <input
-                 className={classes.species}
-                 onChange={handleChange}
-                 value={CValue.species}
-                 name="species"
+                    className={classes.species}
+                    onChange={handleChange}
+                    value={CValue.species}
+                    name="species"
                  />
                 </label>
-                <label className={classes.label}> Nickname:
-
+                <label 
+                    className={classes.label}
+                > Nickname:
                 <input
-                 className={classes.nickname}
-                 onChange={handleChange}
-                 value={CValue.nickname}
-                 name="nickname"
-                 />
-
+                    className={classes.nickname}
+                    onChange={handleChange}
+                    value={CValue.nickname}
+                    name="nickname"
+                />
                 </label>
-
                 <label
-                 className={classes.label}
-                 > Watering Frequency:
-
+                    className={classes.label}
+                >Watering Frequency:
                 <input
-                 className={classes.water}
-                 onChange={handleChange}
-                 value={CValue.h2oFrequency}
-                 name="h2oFrequency"
-                 />
-
-                </label>
-
-               
+                    className={classes.water}
+                    onChange={handleChange}
+                    value={CValue.h2oFrequency}
+                    name="h2oFrequency"
+                />
+                </label>              
              <button onClick={handleSubmit} value="submit" className={classes.submit}>submit</button>
              <button className={classes.deletePlant} onClick={handleDelete}>delete</button>
              <button onClick={()=>{edit(false)}} className={classes.submit}>cancel</button>
-
             </form>
             </div> 
         </div>
     )
 }
+
 const mapActionsToProps={
     deletePlant,
     editPlant
 }
+
 export default connect(null,mapActionsToProps)(EditPlant)
