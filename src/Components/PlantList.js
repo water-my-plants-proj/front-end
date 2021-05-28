@@ -13,19 +13,27 @@ plantPage:{
 },
 PlantList:{
     width:"100%",
-    backgroundColor:"grey"
 },
 title:{
     display:"flex",
     flexDirection:"column",
     alignItems:"center",
     marginTop:"-4%",
-    background:"green",
+    background:"black",
     paddingTop:"3%",
     paddingBottom:"3%"
 },
+header: {
+    color: "white",
+    fontFamily:"fantasy",
+    fontSize:"2rem",
+    letterSpacing:"2px"
+},
 button:{
-    border:"10px solid black"
+    border:"10px solid black",
+    backgroundColor:"pink",
+    fontFamily:"fantasy",
+    fontSize:"2rem",
 },
 })
 
@@ -37,7 +45,7 @@ function PlantList(props) {
 
     useEffect(() => {
         fetchPlants("/plants/plants")
-    }, [])
+    }, [fetchPlants])
     
     const handleAdd=(e)=>{
         e.preventDefault()
@@ -87,5 +95,3 @@ fetchPlants,
 }
 
 export default connect(mapStateToProps,mapActionsToProps)(PlantList)
-
-

@@ -7,25 +7,26 @@ import{editPlant} from '../Actions/Index'
 
 const styles= makeStyles({
     container:{
-        width: "50%",
-        backgroundColor:"grey",
-       
-    },
-    deletePlant:{
-        margin:"0 auto",
-        marginTop:"10%",
-        marginBottom:"10%"
+        width: "30%",
+        marginRight:"10%"
     },
     sidebar: {
         position:"fixed",
         top:"0.5",
-        border:"2px solid green",
+        backgroundColor:"black",
+        border: "10px solid white",
+        borderRadius:"10%",
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"center",
+
     },
     header:{
-        backgroundColor:"green",
         marginTop:"-2%",
         width:"90%",
-        margin:"0 auto"
+        margin:"0 auto",
+        color:"white",
+        fontFamily:"Arial",
     },
     form:{
         display:"flex",
@@ -37,23 +38,37 @@ const styles= makeStyles({
     },
     species:{
         marginBottom:"5%",
-        width:"60%",
+        width:"50%",
     },
     nickname:{
         marginBottom:"5%"
     },
     water:{
-        marginBottom:"5%",
-        width:"30%"
+        marginBottom:"20%",
+        width:"20%"
     },
     submit:{
-        width:"20%",
+        width:"30%",
         display: "block",
-        margin: "0 auto"
+        margin: "0 auto",
+        backgroundColor:"pink",
+        fontSize:"1rem",
+        fontFamily:"fantasy",
     },
     label:{
-        fontSize:"1.5rem"
+        fontSize:"1.5rem",
+        color:"white",
+       
     },
+    deletePlant:{
+        width:"30%",
+        margin: "0 auto",
+        backgroundColor:"pink",
+        fontSize:"1rem",
+        fontFamily:"fantasy",
+        marginTop:"2%",
+        marginBottom:"2%"
+    }
 })
 
 function EditPlant(props) {

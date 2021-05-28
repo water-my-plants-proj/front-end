@@ -19,7 +19,7 @@ const Container = styled.div`
     background-image: url(${ background });
     background-size: cover;
     backgorund-position: bottom;
-    height: 100vh;
+    height: 160vh;,
 `
 
 function App() {

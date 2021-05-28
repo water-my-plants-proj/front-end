@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 
@@ -5,37 +6,35 @@ export default function PlantCard(props) {
     const { plant,returnPlantId} = props
     const Styles = makeStyles({
         Cont:{
-            border:"10px solid green",
+            border:"5px solid #f3f2da",
             display:"flex",
             flexDirection:"row",
             justifyContent:"space-between",
-            width:"90%",
+            width:"50%",
             margin:"0 auto",
             marginBottom:"5%",
-            
+            borderRadius:"20%",
         },
         textCont:{
-            marginBottom:"5%",
             display:"flex",
-            alignItems: "left",
+            alignItems: "center",
             flexDirection: "column",
             justifyContent:"center",
-            marginRight:"10%",
-         
-        },
-        imgCont:{
-            width:"50%",
-            paddingTop:"5%"
-           
-        },
-        img:{
-            width:"80%",
-            borderRadius:"30%",
-            
+            backgroundColor:"black",
+            width:"100%",
+            borderRadius:"20%"
         },
         edit:{
-            width:"50%",
-            marginLeft:"10%"
+            width:"25%",
+            marginBottom:"10%",
+            backgroundColor:"pink",
+            fontSize:"1rem",
+            fontFamily:"fantasy",
+            textAlign:"center"
+        },
+        text:{
+            color:"white",
+            fontFamily:"cursive"
         }
         })
 
@@ -47,10 +46,10 @@ export default function PlantCard(props) {
     return (
         <div className={classes.Cont}>
             <div className={classes.textCont}>
-            <p className={classes.text}> Species: {plant.species}</p>
-            <p className={classes.text}> Nickname:{plant.nickname}</p>
-            <p className={classes.text}> Watering Frequency:{plant.h2oFrequency}</p>
-            <button onClick={handleClick} className={classes.edit}>Edit</button>
+            <p className={classes.text}> Species:  {plant.species}</p>
+            <p className={classes.text}> Nickname: {plant.nickname}</p>
+            <p className={classes.text}> Watering Frequency: {plant.h2oFrequency}</p>
+            <button onClick={handleClick} className={classes.edit}>Edit your Plant</button>
             </div>
             <div className={classes.imgCont}>
             </div>

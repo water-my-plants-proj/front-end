@@ -11,7 +11,7 @@ const Form = styled.form`
   position: relative;
   top: 150px;
   height: 50vh;
-  width: 30%;
+  width: 40%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
