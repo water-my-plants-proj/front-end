@@ -42,7 +42,7 @@ export const Reducer = (state = initialState, action) => {
         case EDIT_PLANT:
             return({
                 ...state,
-                plantList:  [state.plantList.filter(plant => 
+                plantList:  [...state.plantList.filter(plant => 
                     plant.plant_id !== action.payload.plant_id
                   ), action.payload]
             })
