@@ -3,86 +3,62 @@ import React,{useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import styled from "styled-components";
 
-const StyledDiv = styled.div`
+const Form = styled.form`
+  position: relative;
+  top: 150px;
+  height: 50vh;
+  width: 30%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  border: 2px solid #52734d;
-  background-color: #ddffbc;
+  color: #f3f2da;
+  border: 1px solid #f3f2da; 
+  box-shadow: 0px 0px 60px #ea97ad;
+  background-color: black;
   font-family: "Lato";
-  width: 30%;
-  margin-top: 15%;
-  padding-bottom: 1%;
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-family: "Roboto";
-  }
-
-  .loginContainer {
-    display: flex;
-    flex-direction: column;
-  }
   label {
     display: flex;
     justify-content: space-between;
+    width: 
   }
-
-const initialValue={
-    username: "unique",
-    password: "Password",
-    phoneNumber:"111-111-1111"
-}
-
-export default function SignUp() {
-	const {push}=useHistory()
-	const [signUpValues, setSignUp] = useState(initialValue);
-	const [ fail, setFail ] = useState(false)
-	const [ errMessage, setErrMessage ] = useState('');
-
-	const onSubmit = e => {
-		 e.preventDefault()
-    	 axios.post("https://plantszapi.herokuapp.com/api/auth/register",signUpValues)
-        .then((res) => {
-            console.log(res)
-			push("/plant-list")
-			setFail(false)
-        })
-        .catch((err) => {
-			console.log(Object.keys(err.response.data.message))
-			const errMessage = err.response.data.message;
-			console.log(errMessage)
-			if (errMessage.search('users_username_unique')) {
-				setErrMessage('user name already exists')
-			} else {
-				setErrMessage('phone number is already linked to an account')
-			}
-			setFail(true)
-         })
-	}
 
   h2 {
-    margin: 0 auto;
-    margin-bottom: 2%;
+  font-family: "Roboto";
+  margin: 25px auto;
+  margin-top: 5%;
+  font-size: 2rem;
+  text-align: center;
+  border-bottom: 3px solid #f3f2da;
   }
+
   button {
-    width: 40%;
-    color: green;
+    background: #f3f2da;
+    margin: 0 10px;
+    border-radius: 10px;
+    padding: 2px 25px;
+    font-size: 1rem;
+    outline: none;
+
+    &:hover {
+      background: black;
+      color: #f3f2da;
+      border: 2px solid #f3f2da;
   }
-  .buttonContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 2%;
+  &:active {
+      transform: scale(.9);
+      box-shadow: inset 2px 2px 5px white;
   }
+  }
+ 
   .errors {
     display: flex;
     color: red;
     font-size: 0.5rem;
   }
-`;
+`
 
 const initialValue = {
   username: "Test",
@@ -114,40 +90,36 @@ export default function SignUp() {
     });
   };
   return (
-    <StyledDiv>
-      <form className="loginContainer" onSubmit={onSubmit}>
-        <h2>Sign Up</h2>
-        <label>
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={signUpValues.username}
-            onChange={onChange}
-          />
-        </label>
-        <label>
-          Phone Number:
-          <input
-            type="text"
-            name="phoneNumber"
-            value={signUpValues.phoneNumber}
-            onChange={onChange}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={signUpValues.password}
-            onChange={onChange}
-          />
-        </label>
-        <div className="buttonContainer">
-          <button>Sign Up</button>
-        </div>
-      </form>
-    </StyledDiv>
+    <Form className="loginContainer" onSubmit={onSubmit}>
+      <h2>Sign Up</h2>
+      <label>
+        Username:
+        <input
+          type="text"
+          name="username"
+          value={signUpValues.username}
+          onChange={onChange}
+        />
+      </label>
+      <label>
+        Phone Number:
+        <input
+          type="text"
+          name="phoneNumber"
+          value={signUpValues.phoneNumber}
+          onChange={onChange}
+        />
+      </label>
+      <label>
+        Password:
+        <input
+          type="password"
+          name="password"
+          value={signUpValues.password}
+          onChange={onChange}
+        />
+      </label>
+      <button>Sign Up</button>
+    </Form>
   );
 }

@@ -21,7 +21,7 @@ const Element = styled.div`
     border: 1px solid #f3f2da; 
     width: 30%;
     padding: 40px;
-    box-shadow: 0px 0px 60px #ea97ad;;
+    box-shadow: 0px 0px 60px #ea97ad;
   
     h1 {
         margin: 25px auto;
