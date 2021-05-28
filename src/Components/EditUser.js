@@ -1,10 +1,10 @@
-// This still needs to grab user info from state
-// quick pulled from main
-
 import React, { useState, useEffect } from "react";
+import { connect } from 'react-redux';
 import styled from "styled-components";
 import schema from "../validation/EditUserSchema";
 import * as yup from "yup";
+import axiosWithAuth from "../Utils/AxiosWithAuth";
+import { editUser } from '../Actions/Index';
 
 const Form = styled.form`
   position: relative;
@@ -65,7 +65,7 @@ const Form = styled.form`
 `
 
 const initialFormValues = {
-  username: "",
+  phoneNumber: "",
   password: "",
 };
 const initialFormErrors = {
@@ -74,11 +74,11 @@ const initialFormErrors = {
 };
 const initialDisabled = true;
 
-export default function EditUser(props) {
+export function EditUser(props) {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [disabled, setDisabled] = useState(initialDisabled);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
-
+  // console.log("EDITUSER PROPS", props)
   const validate = (name, value) => {
     yup
       .reach(schema, name)
@@ -89,30 +89,31 @@ export default function EditUser(props) {
       );
   };
 
-  const editUserSubmit = () => {
+  const onSubmit = evt => {
     const newUserData = {
-      username: formValues.username.trim(),
+      phoneNumber: formValues.phoneNumber.trim(),
       password: formValues.password.trim(),
     };
-    console.log(newUserData);
-    //this information will need to be posted to the end point
+    evt.preventDefault();
+    axiosWithAuth()
+      .put(`/users/users/${props.user_id}`, newUserData)
+      .then(res => {
+        console.log("EDIT USER RESPONSE", res.data)
+        props.editUser(res.data[0])
+      })
+      .catch(err => {
+        console.log(err)
+      })
     setFormValues(initialFormValues);
   };
-  const onSubmit = (evt) => {
-    evt.preventDefault();
-    editUserSubmit();
-  };
 
-  const inputChange = (name, value) => {
+  const onChange = (evt) => {
+    const { name, value } = evt.target;
     validate(name, value);
     setFormValues({
       ...formValues,
       [name]: value,
     });
-  };
-  const onChange = (evt) => {
-    const { name, value } = evt.target;
-    inputChange(name, value);
   };
 
   useEffect(() => {
@@ -123,16 +124,16 @@ export default function EditUser(props) {
       <Form onSubmit={onSubmit}>
         <h2>Edit User</h2>
         <label>
-          Username:
+          New phone number:
           <input
-            name="username"
-            value={formValues.username}
+            name="phoneNumber"
+            value={formValues.phoneNumber}
             onChange={onChange}
           />
         </label>
           <h2 className="errors">{formErrors.username}</h2>
         <label>
-          Password:
+          New password:
           <input
             name="password"
             value={formValues.password}
@@ -144,3 +145,13 @@ export default function EditUser(props) {
       </Form>
   );
 }
+
+const mapStateToProps = state => {
+  return({
+    user_id: state.currentUser.user_id,
+  })
+}
+const mapActionsToProps = {
+  editUser
+}
+export default connect (mapStateToProps, mapActionsToProps)(EditUser);

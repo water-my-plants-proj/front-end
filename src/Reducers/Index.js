@@ -1,8 +1,14 @@
-import { SIGN_UP, LOG_IN, FETCH_START, FETCH_SUCCESS, FETCH_FAIL, ADD_PLANT, EDIT_PLANT, DELETE_PLANT } from '../Actions/Index'
+import { SIGN_UP, LOG_IN, FETCH_START, FETCH_SUCCESS, FETCH_FAIL, ADD_PLANT, EDIT_PLANT, EDIT_USER, DELETE_PLANT } from '../Actions/Index'
 const initialState = {
     plantList: [],
     isFetching: false,
     error: '',
+    currentUser: {
+        user_id: null,
+        username: '',
+        phoneNumber: '',
+        password: '',
+    },
 }
 
 export const Reducer = (state = initialState, action) => {
@@ -12,8 +18,14 @@ export const Reducer = (state = initialState, action) => {
                 ...state,
             })
         case LOG_IN:
+            console.log("ACTION", action)
             return ({
                 ...state,
+                currentUser: {
+                    user_id: action.payload.user_id,
+                    username: action.payload.username,
+                    password: action.payload.password,
+                }
             })
         case FETCH_START:
             return ({
@@ -45,6 +57,14 @@ export const Reducer = (state = initialState, action) => {
                 plantList:  [...state.plantList.filter(plant => 
                     plant.plant_id !== action.payload.plant_id
                   ), action.payload]
+            })
+        case EDIT_USER:
+            return ({
+                ...state,
+                currentUser: {
+                    phoneNumber: action.payload.phoneNumber,
+                    password: action.payload.password,
+                }
             })
         case DELETE_PLANT:
             return ({
