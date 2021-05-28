@@ -3,6 +3,7 @@ import Home from './Components/Home';
 import styled from 'styled-components';
 //Routes
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PrivateRoute from './Components/PrivateRoute';
 //Components
 import AddPlant from './Components/AddPlant'
 import EditUser from './Components/EditUser';
@@ -28,18 +29,10 @@ function App() {
       <NavBar setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
       <Container>
         <Switch>
-          <Route path='/edit-plant'>
-            <EditPlant />
-          </Route>
-          <Route path='/plant-list'>
-            <PlantList/>
-          </Route>
-          <Route path='/add-plant'>
-            <AddPlant />
-          </Route>
-          <Route path='/edit-user'>
-            <EditUser />
-          </Route>
+          <PrivateRoute path='/edit-plant' component={EditPlant} />
+          <PrivateRoute path='/plant-list' component={PlantList} />  
+          <PrivateRoute path='/add-plant' component={AddPlant} />
+          <PrivateRoute path='/edit-user' component={EditUser} /> 
           <Route path="/login">
             <Login setLoggedIn={setLoggedIn} />
           </Route>
